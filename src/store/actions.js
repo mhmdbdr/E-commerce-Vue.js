@@ -1,9 +1,11 @@
+import i18n from '../i18n'
+
 export default {
   async fetchData (context) {
-    const response = await fetch('https://stabraq-clown-default-rtdb.firebaseio.com/products.json')
+    const response = await fetch('https://stabraq-clone-default-rtdb.firebaseio.com/products.json')
     const responseData = await response.json()
     if (!response.ok) {
-      const error = new Error(responseData.message || 'failed load products')
+      const error = new Error(responseData.message || i18n.t('errorAndNote.store.mainStore.responsefiled'))
       throw error
     }
     const Data = []
@@ -25,5 +27,17 @@ export default {
   },
   addtowishlist (context, payload) {
     context.commit('addtowishlist', payload)
+  },
+  setLang (context, payload) {
+    context.commit('setLang', payload)
+  },
+  setCurrentLang (context, payload) {
+    context.commit('setCurrentLang', payload)
+  },
+  pageDir (context, payload) {
+    context.commit('pageDir', payload)
+  },
+  lastRoute (context, payload) {
+    context.commit('lastRoute', payload)
   }
 }

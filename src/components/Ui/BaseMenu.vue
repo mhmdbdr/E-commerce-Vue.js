@@ -7,322 +7,332 @@
       <div class="links">
         <ul>
           <li>
-            <a @click.prevent="supmenubtns('mencbtn')" href="">men</a>
+            <a @click.prevent="supmenubtns('mencbtn')" href="">{{ $t('global.header.nav.men') }}</a>
             <span>
               <font-awesome-icon icon="fa-solid fa-angle-right" />
             </span>
             <base-supmenu @back-arrow="backarrow('mencbtnval')" :show ='mencbtnval'>
-              <template v-slot:title>men</template>
+              <template v-slot:title>{{ $t('global.header.nav.men') }}</template>
               <template v-slot:default>
                 <ul class ='supmenu'>
                   <li>
-                    <router-link to="/collections/MEN">all men</router-link>
+                    <router-link to="/collections/MEN">{{ $t('global.header.navList.men.allmen') }}</router-link>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('mentopscbtn')" href="">tops</a>
+                    <a @click.prevent="supmenubtns('mentopscbtn')" href="">{{ $t('global.header.navList.men.top') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('mentopscbtnval')" :show ='mentopscbtnval'>
-                      <template v-slot:title>tops</template>
+                      <template v-slot:title>{{ $t('global.header.navList.men.top') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/">all tops</router-link>
+                            <router-link to="/">{{ $t('global.header.navList.men.alltops') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/T-shirts">t-shirts</router-link>
+                            <router-link to="/collections/T-shirts">{{ $t('global.header.navList.men.top1') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Graphics">graphics</router-link>
+                            <router-link to="/collections/Graphics">{{ $t('global.header.navList.men.top2') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Grafit-tee">grafit-tee</router-link>
+                            <router-link to="/collections/Grafit-tee">{{ $t('global.header.navList.men.top3') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Polo">polo</router-link>
+                            <router-link to="/collections/Polo">{{ $t('global.header.navList.men.top4') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Shirts">shirts</router-link>
+                            <router-link to="/collections/Shirts">{{ $t('global.header.navList.men.top5') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Long-Sleeves">long-sleeves</router-link>
+                            <router-link to="/collections/Long-Sleeves">{{ $t('global.header.navList.men.top6') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Hoodies">hoodies & sweatshirts</router-link>
+                            <router-link to="/collections/Hoodies">{{ $t('global.header.navList.men.top7') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Zippers">zippers</router-link>
+                            <router-link to="/collections/Zippers">{{ $t('global.header.navList.men.top8') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Pullovers">pullovers</router-link>
+                            <router-link to="/collections/Pullovers">{{ $t('global.header.navList.men.top9') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Jackets & Coats">jackets & oats</router-link>
+                            <router-link to="/collections/Jackets & Coats">{{ $t('global.header.navList.men.top10') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('menbottomscbtn')" href="">bottoms</a>
+                    <a @click.prevent="supmenubtns('menbottomscbtn')" href="">{{ $t('global.header.navList.men.bottom') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('menbottomscbtnval')" :show ='menbottomscbtnval'>
-                      <template v-slot:title>bottoms</template>
+                      <template v-slot:title>{{ $t('global.header.navList.men.bottom') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/">all bottoms</router-link>
+                            <router-link to="/">{{ $t('global.header.navList.men.allbott') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/jeans">jeans</router-link>
+                            <router-link to="/collections/jeans">{{ $t('global.header.navList.men.bottom1') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Jogger">jogger</router-link>
+                            <router-link to="/collections/Jogger">{{ $t('global.header.navList.men.bottom2') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/sweatPants">sweatpants</router-link>
+                            <router-link to="/collections/sweatPants">{{ $t('global.header.navList.men.bottom3') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('menjilbabcbtn')" href="">jilbab</a>
+                    <a @click.prevent="supmenubtns('menjilbabcbtn')" href="">{{ $t('global.header.navList.men.jilbab') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('menjilbabcbtnval')" :show ='menjilbabcbtnval'>
-                      <template v-slot:title>jilbab</template>
+                      <template v-slot:title>{{ $t('global.header.navList.men.jilbab') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/">all jilbab</router-link>
+                            <router-link to="/">{{ $t('global.header.navList.men.alljil') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/stabraq jilbab">jilbab</router-link>
+                            <router-link to="/collections/stabraq jilbab">{{ $t('global.header.navList.men.jilbab1') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('menaccesscbtn')" href="">accessories</a>
+                    <a @click.prevent="supmenubtns('menaccesscbtn')" href="">{{ $t('global.header.navList.men.accessories') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('menaccesscbtnval')" :show ='menaccesscbtnval'>
-                      <template v-slot:title>accessories</template>
+                      <template v-slot:title>{{ $t('global.header.navList.men.accessories') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/collections/ACCESSORIES">all accessories</router-link>
+                            <router-link to="/collections/ACCESSORIES">{{ $t('global.header.navList.men.allaccess') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Socks">socks</router-link>
+                            <router-link to="/collections/Socks">{{ $t('global.header.navList.men.accessories1') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/wallet">wallet</router-link>
+                            <router-link to="/collections/wallet">{{ $t('global.header.navList.men.accessories2') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/note book">notebooks</router-link>
+                            <router-link to="/collections/note book">{{ $t('global.header.navList.men.accessories3') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Gift Card">gift card</router-link>
+                            <router-link to="/collections/Gift Card">{{ $t('global.header.navList.men.accessories4') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('menfeaturedcbtn')" href="/">featured</a>
+                    <a @click.prevent="supmenubtns('menfeaturedcbtn')" href="/">{{ $t('global.header.navList.men.featured') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('menfeaturedcbtnval')" :show ='menfeaturedcbtnval'>
-                      <template v-slot:title>featured</template>
+                      <template v-slot:title>{{ $t('global.header.navList.men.featured') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/collections/New Arrivals">all featured</router-link>
+                            <router-link to="/collections/New Arrivals">{{ $t('global.header.navList.men.allfeat') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/New Arrivals">featured</router-link>
+                            <router-link to="/collections/New Arrivals">{{ $t('global.header.navList.men.featured') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <router-link to="/collections/MEN">shop all men</router-link>
+                    <router-link to="/collections/MEN">{{ $t('global.header.navList.men.shopallmen') }}</router-link>
                   </li>
                 </ul>
               </template>
             </base-supmenu>
           </li>
           <li>
-            <a @click.prevent="supmenubtns('womenscbtn')" href="">women</a>
+            <a @click.prevent="supmenubtns('womenscbtn')" href="">{{ $t('global.header.nav.women') }}</a>
             <span>
               <font-awesome-icon icon="fa-solid fa-angle-right" />
             </span>
             <base-supmenu @back-arrow="backarrow('womenscbtnval')" :show ='womenscbtnval'>
-              <template v-slot:title>women</template>
+              <template v-slot:title>{{ $t('global.header.nav.women') }}</template>
               <template v-slot:default>
                 <ul class ='supmenu'>
-                  <li><router-link to="/collections/WOMEN">all women</router-link></li>
+                  <li><router-link to="/collections/WOMEN">{{ $t('global.header.navList.women.allwomen') }}</router-link></li>
                   <li>
-                    <a @click.prevent="supmenubtns('womenstopscbtn')" href="/">tops</a>
+                    <a @click.prevent="supmenubtns('womenstopscbtn')" href="/">{{ $t('global.header.navList.women.top') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('womenstopscbtnval')" :show ='womenstopscbtnval'>
-                      <template v-slot:title>tops</template>
+                      <template v-slot:title>{{ $t('global.header.navList.women.top') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="">all tops</router-link>
+                            <router-link to="">{{ $t('global.header.navList.women.alltops') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Basics">basics</router-link>
+                            <router-link to="/collections/Basics">{{ $t('global.header.navList.women.top1') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Graphics">graphics</router-link>
+                            <router-link to="/collections/Graphics">{{ $t('global.header.navList.women.top2') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Pullovers">pullovers</router-link>
+                            <router-link to="/collections/Pullovers">{{ $t('global.header.navList.women.top3') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Zippers">zippers</router-link>
+                            <router-link to="/collections/Zippers">{{ $t('global.header.navList.women.top4') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Sweatshirts">sweatshirts</router-link>
+                            <router-link to="/collections/Sweatshirts">{{ $t('global.header.navList.women.top5') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('womensbottomscbtn')" href="/">bottoms</a>
+                    <a @click.prevent="supmenubtns('womensbottomscbtn')" href="/">{{ $t('global.header.navList.women.bottom') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('womensbottomscbtnval')" :show ='womensbottomscbtnval'>
-                      <template v-slot:title>bottoms</template>
+                      <template v-slot:title>{{ $t('global.header.navList.women.bottom') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/">all bottoms</router-link>
+                            <router-link to="/">{{ $t('global.header.navList.women.allbottoms') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/skirts">skirts</router-link>
+                            <router-link to="/collections/skirts">{{ $t('global.header.navList.women.bottom1') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('womensdressescbtn')" href="">dresses & jumpsuits</a>
+                    <a @click.prevent="supmenubtns('womensdressescbtn')" href="">{{ $t('global.header.navList.women.dress') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('womensdressescbtnval')" :show ='womensdressescbtnval'>
-                      <template v-slot:title>dresses & jumpsuits</template>
+                      <template v-slot:title>{{ $t('global.header.navList.women.dress') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/collections/Dress">all dresses & jumpsuits</router-link>
+                            <router-link to="/collections/Dress">{{ $t('global.header.navList.women.alldress') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Dress">dress</router-link>
+                            <router-link to="/collections/Dress">{{ $t('global.header.navList.women.dress1') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('womensaccesscbtn')" href="/">accessories</a>
+                    <a @click.prevent="supmenubtns('womensaccesscbtn')" href="/">{{ $t('global.header.navList.women.accessories') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('womensaccesscbtnval')" :show ='womensaccesscbtnval'>
-                      <template v-slot:title>accessories</template>
+                      <template v-slot:title>{{ $t('global.header.navList.women.accessories') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/collections/ACCESSORIES">all accessories</router-link>
+                            <router-link to="/collections/ACCESSORIES">{{ $t('global.header.navList.women.allaccesswomen') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Scarf">scarf</router-link>
+                            <router-link to="/collections/Scarf">{{ $t('global.header.navList.women.accessories1') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/socks">socks</router-link>
+                            <router-link to="/collections/socks">{{ $t('global.header.navList.women.accessories2') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/note book">notebooks</router-link>
+                            <router-link to="/collections/note book">{{ $t('global.header.navList.women.accessories3') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/Gift Card">gift card</router-link>
+                            <router-link to="/collections/Gift Card">{{ $t('global.header.navList.women.accessories4') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('womensfeaturedcbtn')" href="">featured</a>
+                    <a @click.prevent="supmenubtns('womensfeaturedcbtn')" href="">{{ $t('global.header.navList.women.featured') }}</a>
                     <span>
                       <font-awesome-icon icon="fa-solid fa-angle-right" />
                     </span>
                     <base-supmenu @back-arrow="backarrow('womensfeaturedcbtnval')" :show ='womensfeaturedcbtnval'>
-                      <template v-slot:title>featured</template>
+                      <template v-slot:title>{{ $t('global.header.navList.women.featured') }}</template>
                       <template v-slot:default>
                         <ul class ='supmenu multisupmenu'>
                           <li>
-                            <router-link to="/collections/New Arrivals">all featured</router-link>
+                            <router-link to="/collections/New Arrivals">{{ $t('global.header.navList.women.allfeatured') }}</router-link>
                           </li>
                           <li>
-                            <router-link to="/collections/New Arrivals">new arrivals</router-link>
+                            <router-link to="/collections/New Arrivals">{{ $t('global.header.navList.women.featured1') }}</router-link>
                           </li>
                         </ul>
                       </template>
                     </base-supmenu>
                   </li>
                   <li>
-                    <a @click.prevent="supmenubtns('womensfeaturedcbtn')" href="/">shop all women</a>
+                    <a @click.prevent="supmenubtns('womensfeaturedcbtn')" href="/">{{ $t('global.header.navList.women.shopallwomen') }}</a>
                   </li>
                 </ul>
               </template>
             </base-supmenu>
             </li>
           <li>
-            <a @click.prevent="supmenubtns('kidscbtn')" href="">kids</a>
+            <a @click.prevent="supmenubtns('kidscbtn')" href="">{{ $t('global.header.nav.kids') }}</a>
             <span>
               <font-awesome-icon icon="fa-solid fa-angle-right" />
             </span>
             <base-supmenu @back-arrow="backarrow('kidscbtnval')" :show ='kidscbtnval'>
-              <template v-slot:title>kids</template>
+              <template v-slot:title>{{ $t('global.header.nav.kids') }}</template>
               <template v-slot:default>
                 <ul class ='supmenu'>
-                  <li><router-link to="/collections/KIDS">all kids</router-link></li>
+                  <li><router-link to="/collections/KIDS">{{ $t('global.header.navList.kids.allkids') }}</router-link></li>
                   <li>
-                    <router-link to="/collections/Graphics">graphics</router-link>
+                    <router-link to="/collections/Graphics">{{ $t('global.header.navList.kids.top2') }}</router-link>
                   </li>
                   <li>
-                    <router-link to="/collections/Zippers">zippers</router-link>
+                    <router-link to="/collections/Zippers">{{ $t('global.header.navList.kids.top3') }}</router-link>
                   </li>
                   <li>
-                    <router-link to="/collections/Pants">pants</router-link>
+                    <router-link to="/collections/Pants">{{ $t('global.header.navList.kids.top1') }}</router-link>
                   </li>
                 </ul>
               </template>
             </base-supmenu>
             </li>
-          <li><router-link to="/collections/ACCESSORIES">accessories</router-link></li>
+          <li><router-link to="/collections/ACCESSORIES">{{ $t('global.header.nav.accessories') }}</router-link></li>
         </ul>
       </div>
       <div class="info">
-        <router-link to="/Collections/wishlist">my wish lists</router-link>
+        <router-link to="/Collections/wishlist">{{ $t('global.header.mywishlist') }}</router-link>
+        <div class="langBtn">
+          <span class="head collapsed" type='button' data-bs-toggle="collapse" data-bs-target="#lang" aria-expanded="false" aria-controls="lang">
+            {{ $t('global.header.lang') }}
+            <font-awesome-icon icon="fa-solid fa-language" />
+            </span>
+          <div class="lang-container collapse" id="lang">
+            <span @click="changeLang('en')" class="lang">English</span>
+            <span @click="changeLang('ar')" class="lang">Arabic</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -334,9 +344,37 @@ export default {
   props: ['show'],
   data () {
     return {
+      loadSpinLangError: ''
     }
   },
   methods: {
+    async changeLang (lang) {
+      const linkLang = document.querySelector('.main-font')
+      try {
+        if (lang === 'en') {
+          this.$i18n.locale = lang
+          this.$store.dispatch('setLang', 'en')
+          this.$store.dispatch('setCurrentLang', 'English')
+          this.$store.dispatch('pageDir', 'ltr')
+          document.documentElement.dir = 'ltr'
+          document.documentElement.lang = 'en'
+          linkLang.setAttribute('href', this.$store.getters.enFontHref)
+          document.body.style.fontFamily = 'Poppins, sans-serif'
+        } else {
+          this.$i18n.locale = lang
+          this.$store.dispatch('setLang', 'ar')
+          this.$store.dispatch('setCurrentLang', 'Arabic')
+          this.$store.dispatch('pageDir', 'rtl')
+          document.documentElement.dir = 'rtl'
+          document.documentElement.lang = 'ar'
+          linkLang.setAttribute('href', this.$store.getters.arFontHref)
+          document.body.style.fontFamily = 'Cairo , sans-serif'
+        }
+        window.localStorage.setItem('lang', JSON.stringify(lang))
+      } catch (error) {
+        this.loadSpinLangError = error || 'changing lang went wrong'
+      }
+    },
     closebar () {
       this.$store.dispatch('mainmenu/closebtn')
       this.$store.dispatch('mainmenu/closeall')
@@ -481,18 +519,60 @@ export default {
     }
   }
   .info{
-    margin-top: 20px;
     a{
       display: block;
-      padding: 7px 20px 6px;
+      padding: 17px 20px 6px;
       color: #3c3c3c;
-      font-size: 12px;
-      font-weight: 400;
+      font-size: 14px;
+      font-weight: 700;
       text-transform: uppercase;
       transition-duration: 0.2s;
       cursor: pointer;
       &:hover{
         color: #3adb6b;
+      }
+    }
+  }
+  .langBtn{
+    padding: 17px 20px;
+    margin-top: 10px;
+    border-top: 1px solid #ebebeb;
+    color: #505050;
+    .head{
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+      font-weight: 500;
+      &.collapsed{
+        svg{
+          color: #505050;
+        }
+      }
+      svg{
+        color: #3adb6b;
+        margin-left: 10px;
+      }
+    }
+    .lang-container{
+      margin-top: 10px;
+      position: relative;
+      .lang{
+        &:active{
+          box-shadow: 1px 0px 5px 0px rgb(173, 171, 171);
+        }
+        display: inline-block;
+        margin-top: 10px;
+        margin-right: 15px;
+        padding-bottom: 3px;
+        border-radius: 6px;
+        background-color: #e7e8ea;
+        padding: 10px 15px;
+        font-weight: 500;
+        user-select: none;
+        cursor: pointer;
+        &:last-of-type{
+          margin: 0 15px;
+        }
       }
     }
   }

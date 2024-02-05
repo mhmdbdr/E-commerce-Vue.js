@@ -4,7 +4,7 @@
         <div class="collcont d-flex d-lg-none">
           <div @click="aass" class="collbtn d-flex" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             <span>
-              {{ ariaexsummary ? 'Hide' : 'Show'}} order summary
+              {{ ariaexsummary ? $t('checkoutPage.hide') + ' ' + $t('checkoutPage.ordersum') : $t('checkoutPage.show') + ' ' + $t('checkoutPage.ordersum') }}
               <font-awesome-icon v-if="ariaexsummary" icon="fa-solid fa-caret-up" />
               <font-awesome-icon v-if="!ariaexsummary" icon="fa-solid fa-caret-down" />
             </span>
@@ -29,25 +29,25 @@
               </div>
               <div class="controls">
               <div class="form-floating">
-                <input type="text" class="form-control" id="apply" placeholder="Gift card" v-model="giftCard">
-                <label for="apply">Gift card</label>
+                <input type="text" class="form-control" id="apply" v-model="giftCard">
+                <label for="apply">{{ $t('checkoutPage.product.giftcard') }}</label>
               </div>
-                <button :class="applaycheck">Apply</button>
+                <button :class="applaycheck">{{ $t('checkoutPage.product.apply') }}</button>
               </div>
               <div class="totals">
                 <div class="subtotal">
-                  <span>subtotal</span>
+                  <span>{{ $t('checkoutPage.product.subtotal') }}</span>
                   <span>{{ totalCartPrice }} LE</span>
                 </div>
                 <div class="shipping">
                   <span class="spicon">
-                    shipping
+                    {{ $t('checkoutPage.product.shipping') }}
                     <font-awesome-icon @click="openShippingPopup('open')" icon="fa-regular fa-circle-question" />
                     </span>
-                  <span>Enter shipping address</span>
+                  <span>{{ $t('checkoutPage.product.eshippingad') }}</span>
                 </div>
                 <div class="total">
-                  <span>total</span>
+                  <span>{{ $t('checkoutPage.product.total') }}</span>
                   <span>{{ totalCartPrice }} LE</span>
                 </div>
                   <teleport to="body">
@@ -56,21 +56,21 @@
                         <div @click="openShippingPopup('close')" class="blueshadow"></div>
                         <div class="popup">
                           <div class="head">
-                            <h4>Shipping policy</h4>
+                            <h4>{{ $t('checkoutPage.product.shippingpol') }}</h4>
                             <span @click="openShippingPopup('close')">X</span>
                           </div>
                           <div class="content">
                             <div class="sec">
-                              <span>Shipping</span>
-                              <p>Stabraq is not responsible for return shipping costs. Every shipping has to be paid by the customer, even if the item had free shipping in the first place, the customer has to pay for the shipping in return.</p>
+                              <span>{{ $t('checkoutPage.product.shipping') }}</span>
+                              <p>{{ $t('checkoutPage.product.shippingp') }}</p>
                             </div>
                             <div class="sec">
-                              <span>Your Consent</span>
-                              <p>By using our website, registering an account, or making a purchase, you hereby consent to our Return & Refund Policy and agree to its terms.</p>
+                              <span>{{ $t('checkoutPage.product.yconsent') }}</span>
+                              <p>{{ $t('checkoutPage.product.consentp') }}</p>
                             </div>
                             <div class="sec">
-                              <span>Changes To Our Return & Refund Policy</span>
-                              <p>Should we update, amend or make any changes to this document so that they accurately reflect our Service and policies. Unless otherwise required by law, those changes will be prominently posted here. Then, if you continue to use the Service, you will be bound by the updated Return & Refund Policy. If you do not want to agree to this or any updated Return & Refund Policy, you can delete your account.</p>
+                              <span>{{ $t('checkoutPage.product.refund') }}</span>
+                              <p>{{ $t('checkoutPage.product.refundp') }}</p>
                             </div>
                           </div>
                         </div>
@@ -84,38 +84,38 @@
         <div class="contact col-12 col-lg-7">
           <div class="contact-content">
             <div v-if="errorinput" class="alert alert-danger" role="alert">
-              Your information is incorrect, please check your input fields
+              {{ $t('checkoutPage.forms.inputerror') }}
             </div>
             <form @submit.prevent="submitForm">
               <div class="contactcont">
                 <div class="head">
-                  <h2>Contact</h2>
-                  <span v-if="!checkacc">Have an account? <router-link to="/AccountRegister">Log in</router-link></span>
+                  <h2>{{ $t('checkoutPage.forms.contact') }}</h2>
+                  <span v-if="!checkacc">{{ $t('checkoutPage.forms.haveacc') }} <router-link to="/AccountRegister">{{ $t('checkoutPage.forms.login') }}</router-link></span>
                 </div>
                 <div class="form-floating" :class='{invalid: !email.isvalid.emailvalid || !email.isvalid.emptyvalid}'>
-                  <input type="email" class="form-control" id="contact" placeholder="Email" v-model.trim="email.val" @blur="clearValidate('email')">
-                  <label for="contact">Email</label>
-                  <p v-if="!email.isvalid.emailvalid && email.isvalid.emptyvalid">Email field must be correct</p>
-                  <p v-if="!email.isvalid.emptyvalid && email.isvalid.emailvalid">Email field must not be empty</p>
-                  <p v-if="!email.isvalid.emptyvalid && !email.isvalid.emailvalid">Email field must not be empty or wrong</p>
+                  <input type="email" class="form-control" id="contact" :placeholder='$t("checkoutPage.placeholders.email")' v-model.trim="email.val" @blur="clearValidate('email')">
+                  <label for="contact">{{ $t('checkoutPage.forms.email') }}</label>
+                  <p v-if="!email.isvalid.emailvalid && email.isvalid.emptyvalid">{{ $t('checkoutPage.forms.emerror1') }}</p>
+                  <p v-if="!email.isvalid.emptyvalid && email.isvalid.emailvalid">{{ $t('checkoutPage.forms.emerror2') }}</p>
+                  <p v-if="!email.isvalid.emptyvalid && !email.isvalid.emailvalid">{{ $t('checkoutPage.forms.emerror3') }}</p>
                 </div>
               </div>
               <div class="delivery">
                 <div class="head">
-                  <h2>Delivery</h2>
+                  <h2>{{ $t('checkoutPage.forms.delivery') }}</h2>
                 </div>
                 <div class="delivery-controls">
                   <div class="form-check active">
                       <input @click="delactive" class="form-check-input" type="radio" name="flexRadioDefault" value="ship" id="flexRadioDefault1" checked v-model="delivery">
                       <label @click="delactive" class="form-check-label" for="flexRadioDefault1">
-                        <span>Ship</span>
+                        <span>{{ $t('checkoutPage.forms.ship') }}</span>
                         <font-awesome-icon icon="fa-solid fa-truck-fast" />
                       </label>
                   </div>
                   <div class="form-check">
                       <input @click="delactive" class="form-check-input" type="radio" name="flexRadioDefault" value="pickup" id="flexRadioDefault2" v-model="delivery">
                       <label @click="delactive" class="form-check-label" for="flexRadioDefault2">
-                        <span>Pick up</span>
+                        <span>{{ $t('checkoutPage.forms.pickup') }}</span>
                         <font-awesome-icon icon="fa-solid fa-shop" />
                       </label>
                   </div>
@@ -177,31 +177,31 @@
                         <option value="GB">United Kingdom</option>
                         <option value="US">United States</option>
                       </select>
-                      <label for="floatingSelect">country/Region</label>
-                      <p v-if="!country.isvalid">Country field must not be empty</p>
+                      <label for="floatingSelect">{{ $t('checkoutPage.forms.countregion') }}</label>
+                      <p v-if="!country.isvalid">{{ $t('checkoutPage.forms.countregionerror') }}</p>
                     </div>
                     <div class="name">
                       <div class="form-floating fname" :class='{invalid: !fname.isvalid}'>
-                        <input type="text" class="form-control" id="fname" placeholder="First name" v-model.trim="fname.val" @blur="clearValidate('fname')"  @keyup="clearValidate('fname')">
-                        <label for="fname">First name</label>
-                        <p v-if="!fname.isvalid">First name must not be empty</p>
+                        <input type="text" class="form-control" id="fname" :placeholder='$t("checkoutPage.placeholders.fname")' v-model.trim="fname.val" @blur="clearValidate('fname')"  @keyup="clearValidate('fname')">
+                        <label for="fname">{{ $t('checkoutPage.forms.fname') }}</label>
+                        <p v-if="!fname.isvalid">{{ $t('checkoutPage.forms.fnameerror') }}</p>
                       </div>
                       <div class="form-floating lname" :class='{invalid: !lname.isvalid}'>
-                        <input type="text" class="form-control" id="lname" placeholder="Last name" v-model.trim="lname.val" @blur="clearValidate('lname')"  @keyup="clearValidate('lname')">
-                        <label for="lname">Last name</label>
-                        <p v-if="!lname.isvalid">Last name must not be empty</p>
+                        <input type="text" class="form-control" id="lname" :placeholder='$t("checkoutPage.placeholders.lname")' v-model.trim="lname.val" @blur="clearValidate('lname')"  @keyup="clearValidate('lname')">
+                        <label for="lname">{{ $t('checkoutPage.forms.lname') }}</label>
+                        <p v-if="!lname.isvalid">{{ $t('checkoutPage.forms.lnameerror') }}</p>
                       </div>
                     </div>
                     <div class="form-floating address" :class='{invalid: !address.isvalid}'>
-                      <input type="text" class="form-control" id="address" placeholder="Address" v-model.trim="address.val" @blur="clearValidate('address')" @keyup="clearValidate('address')">
-                      <label for="address">Address</label>
-                      <p v-if="!address.isvalid">Address must not be empty</p>
+                      <input type="text" class="form-control" id="address" :placeholder='$t("checkoutPage.placeholders.address")' v-model.trim="address.val" @blur="clearValidate('address')" @keyup="clearValidate('address')">
+                      <label for="address">{{ $t('checkoutPage.forms.address') }}</label>
+                      <p v-if="!address.isvalid">{{ $t('checkoutPage.forms.addresserror') }}</p>
                     </div>
                     <div class="info">
                       <div class="form-floating" :class='{invalid: !city.isvalid, countrydiff: country.val !== "EG"}'>
-                        <input type="text" class="form-control" id="city" placeholder="City" v-model.trim="city.val" @blur="clearValidate('city')" @keyup="clearValidate('city')">
-                        <label for="city">City</label>
-                        <p v-if="!city.isvalid">City field must not be empty</p>
+                        <input type="text" class="form-control" id="city" :placeholder='$t("checkoutPage.placeholders.city")' v-model.trim="city.val" @blur="clearValidate('city')" @keyup="clearValidate('city')">
+                        <label for="city">{{ $t('checkoutPage.forms.city') }}</label>
+                        <p v-if="!city.isvalid">{{ $t('checkoutPage.forms.cityerror') }}</p>
                       </div>
                       <div class="form-floating" v-if="country.val === 'EG'" :class='{invalid: !gover.isvalid, countrydiff: country.val !== "EG"}'>
                         <select class="form-select" id="gover" aria-label="Floating label select example" v-model="gover.val">
@@ -235,108 +235,108 @@
                           <option value="JS">South Sinai</option>
                           <option value="SUZ">Suez</option>
                         </select>
-                        <label for="gover">Governorate</label>
-                        <p v-if="!gover.isvalid">Governorate must no be empty</p>
+                        <label for="gover">{{ $t('checkoutPage.forms.govern') }}</label>
+                        <p v-if="!gover.isvalid">{{ $t('checkoutPage.forms.governerror') }}</p>
                       </div>
                       <div class="form-floating" :class='{invalid: !postalcode.isvalid, countrydiff: country.val !== "EG"}'>
-                        <input type="text" class="form-control" id="postalcode" placeholder="Postal code" v-model.trim="postalcode.val" @blur="clearValidate('postalcode')" @keyup="clearValidate('postalcode')">
-                        <label for="postalcode">Postal code</label>
-                        <p v-if="!postalcode.isvalid">Postal code must not be empty</p>
+                        <input type="text" class="form-control" id="postalcode" :placeholder='$t("checkoutPage.placeholders.postalc")' v-model.trim="postalcode.val" @blur="clearValidate('postalcode')" @keyup="clearValidate('postalcode')">
+                        <label for="postalcode">{{ $t('checkoutPage.forms.postal') }}</label>
+                        <p v-if="!postalcode.isvalid">{{ $t('checkoutPage.forms.postalerror') }}</p>
                       </div>
                     </div>
                     <div class="form-floating phone" :class='{invalid: !phone.isvalid}'>
-                      <input type="number" class="form-control" id="Phone" placeholder="Phone" v-model.trim="phone.val" @blur="clearValidate('phone')" @keyup="clearValidate('phone')">
-                      <label for="Phone">Phone</label>
+                      <input type="number" class="form-control" id="Phone" :placeholder='$t("checkoutPage.placeholders.phone")' v-model.trim="phone.val" @blur="clearValidate('phone')" @keyup="clearValidate('phone')">
+                      <label for="Phone">{{ $t('checkoutPage.forms.phone') }}</label>
                       <font-awesome-icon icon="fa-regular fa-circle-question" />
-                      <span>In case we need to <br> contact you about your order</span>
-                      <p v-if="!phone.isvalid">Phone must not be empty</p>
+                      <span>{{ $t('checkoutPage.forms.phonemass1') }} <br> {{ $t('checkoutPage.forms.phonemass2') }}</span>
+                      <p v-if="!phone.isvalid">{{ $t('checkoutPage.forms.phoneerror') }}</p>
                     </div>
                     <div class="form-check saveinfo">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       <label class="form-check-label" for="flexCheckDefault">
-                        Save this information for next time
+                        {{ $t('checkoutPage.forms.savefornext') }}
                       </label>
                     </div>
                     <div class="form-check textme">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       <label class="form-check-label" for="flexCheckDefault">
-                        Text me with news and offers
+                        {{ $t('checkoutPage.forms.textme') }}
                       </label>
                     </div>
                     <div class="shipping-methods">
-                      <h3>shipping-methods</h3>
+                      <h3>{{ $t('checkoutPage.forms.shippingmeth') }}</h3>
                       <div class="form-check active">
                           <input @click="shippingmethodactive" class="form-check-input" type="radio" name="shippingmethods" value="aramexoffice" id="aram" checked v-model="shippingmethods">
                           <label @click="shippingmethodactive" class="form-check-label" for="aram">
-                            <span>Aramex Office</span>
+                            <span>{{ $t('checkoutPage.forms.aramex') }}</span>
                             <span class="price">35 LE</span>
                           </label>
                       </div>
                       <div class="form-check">
                           <input @click="shippingmethodactive" class="form-check-input" type="radio" name="shippingmethods" value="doorstep" id="doorstep" v-model="shippingmethods">
                           <label @click="shippingmethodactive" class="form-check-label" for="doorstep">
-                            <span>Doorstep shipping</span>
+                            <span>{{ $t('checkoutPage.forms.doorshipp') }}</span>
                             <span class="price">70 LE</span>
                           </label>
                       </div>
                     </div>
                   </div>
                   <div v-if="delivery === 'pickup'" class="pickup">
-                    <h4>Pickup locations</h4>
-                    <p>There is 1 store with stock close to your location</p>
+                    <h4>{{ $t('checkoutPage.forms.pickuplock') }}</h4>
+                    <p>{{ $t('checkoutPage.forms.pickupp') }}</p>
                     <div class="onlinestore">
                       <div class="onlinehead">
-                        <span>Online Store</span>
-                        <p>1 Mostafa El-Nahaas, 1st Floor, C, Nasr City</p>
+                        <span>{{ $t('checkoutPage.forms.onlinestore') }}</span>
+                        <p>{{ $t('checkoutPage.forms.onlinestorep') }}</p>
                       </div>
                       <div class="info">
-                        <span>Free</span>
-                        <p>Usually ready in 24 hours</p>
+                        <span>{{ $t('checkoutPage.forms.info') }}</span>
+                        <p>{{ $t('checkoutPage.forms.infop') }}</p>
                       </div>
                     </div>
                     <div class="form-check textme">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       <label class="form-check-label" for="flexCheckDefault">
-                        Text me with news and offers
+                        {{ $t('checkoutPage.forms.textme') }}
                       </label>
                     </div>
                 </div>
                 </div>
               </div>
               <div class="payment" id="payment">
-                <h3>Payment</h3>
-                <p>All transactions are secure and encrypted.</p>
+                <h3>{{ $t('checkoutPage.forms.payment') }}</h3>
+                <p>{{ $t('checkoutPage.forms.paymentp') }}</p>
                   <div class="form-check active" type="button" data-bs-toggle="collapse" data-bs-target="#collapsevisa" aria-expanded="false" aria-controls="collapsevisa">
                     <input @click="paymentmethods" class="form-check-input" type="radio" name="payment" value="visa" id="visa" checked v-model="paymentmethod">
                     <label @click="paymentmethods" class="form-check-label" for="visa">
-                      <span>Pay via (Debit/Credit cards/Wallets/Installments)</span>
+                      <span>{{ $t('checkoutPage.forms.cards') }}</span>
                     </label>
                   </div>
                   <div class="visaalert collapse show" aria-labelledby="collapsevisa" id="collapsevisa" data-bs-parent="#payment">
                     <font-awesome-icon icon="fa-regular fa-window-restore" />
-                    <p>After clicking “Pay now”, you will be redirected to Pay via (Debit/Credit cards/Wallets/Installments) to complete your purchase securely.</p>
+                    <p>{{ $t('checkoutPage.forms.cardsp') }}</p>
                   </div>
                   <div class="form-check" type="button" data-bs-toggle="collapse" data-bs-target="#collapsevisa2" aria-expanded="false" aria-controls="collapsevisa2">
                     <input @click="paymentmethods" class="form-check-input" type="radio" name="payment" value="cash" id="cash" v-model="paymentmethod">
                     <label @click="paymentmethods" class="form-check-label" for="cash">
-                      <span>Cash on Delivery (COD)</span>
+                      <span>{{ $t('checkoutPage.forms.cod') }}</span>
                     </label>
                   </div>
                   <div aria-labelledby="collapsevisa2" id="collapsevisa2" data-bs-parent="#payment"></div>
               </div>
               <div class="billingaddress" id="accordion">
-                <h3>Billing address</h3>
+                <h3>{{ $t('checkoutPage.forms.billingad') }}</h3>
                 <div class="form-check active" type="button" data-bs-toggle="collapse" data-bs-target="#collapsebilling2" aria-expanded="false" aria-controls="collapsebilling2">
                   <input @click="billingmethods" class="form-check-input" type="radio" name="billing" value="sameasshipping" id="sameasshipping" checked v-model="billingmethod">
                   <label @click="billingmethods" class="form-check-label" for="sameasshipping">
-                    <span>Same as shipping address</span>
+                    <span>{{ $t('checkoutPage.forms.sameas') }}</span>
                   </label>
                 </div>
                 <div class="collapse" aria-labelledby="collapsebilling2" id="collapsebilling2" data-bs-parent="#accordion"></div>
                 <div class="form-check" type="button" data-bs-toggle="collapse" data-bs-target="#collapsebilling" aria-expanded="false" aria-controls="collapsebilling">
                   <input @click="billingmethods" class="form-check-input" type="radio" name="billing" value="useadifferent" id="useadifferent" v-model="billingmethod">
                   <label @click="billingmethods" class="form-check-label" for="useadifferent">
-                    <span>Use a different billing address</span>
+                    <span>{{ $t('checkoutPage.forms.usediff') }}</span>
                   </label>
                 </div>
                 <div class="billingalert collapse" aria-labelledby="collapsebilling" id="collapsebilling" data-bs-parent="#accordion">
@@ -396,31 +396,31 @@
                         <option value="GB">United Kingdom</option>
                         <option value="US">United States</option>
                       </select>
-                      <label for="floatingSelect">country/Region</label>
-                      <p v-if="!billinginfo.country.isvalid">Country field must not be empty</p>
+                      <label for="floatingSelect">{{ $t('checkoutPage.forms.countregion') }}</label>
+                      <p v-if="!billinginfo.country.isvalid">{{ $t('checkoutPage.forms.countregionerror') }}</p>
                     </div>
                     <div class="name">
                       <div class="form-floating fname" :class='{invalid: !billinginfo.fname.isvalid}'>
-                        <input type="text" class="form-control" id="fname" placeholder="First name" v-model.trim="billinginfo.fname.val" @blur="clearValidatebilling('fname')"  @keyup="clearValidatebilling('fname')">
-                        <label for="fname">First name</label>
-                        <p v-if="!billinginfo.fname.isvalid">First name must not be empty</p>
+                        <input type="text" class="form-control" id="fname" :placeholder='$t("checkoutPage.placeholders.fname")' v-model.trim="billinginfo.fname.val" @blur="clearValidatebilling('fname')"  @keyup="clearValidatebilling('fname')">
+                        <label for="fname">{{ $t('checkoutPage.forms.fname') }}</label>
+                        <p v-if="!billinginfo.fname.isvalid">{{ $t('checkoutPage.forms.fnameerror') }}</p>
                       </div>
                       <div class="form-floating lname" :class='{invalid: !billinginfo.lname.isvalid}'>
-                        <input type="text" class="form-control" id="lname" placeholder="Last name" v-model.trim="billinginfo.lname.val" @blur="clearValidatebilling('lname')"  @keyup="clearValidatebilling('lname')">
-                        <label for="lname">Last name</label>
-                        <p v-if="!billinginfo.lname.isvalid">Last name must not be empty</p>
+                        <input type="text" class="form-control" id="lname" :placeholder='$t("checkoutPage.placeholders.lname")' v-model.trim="billinginfo.lname.val" @blur="clearValidatebilling('lname')"  @keyup="clearValidatebilling('lname')">
+                        <label for="lname">{{ $t('checkoutPage.forms.lname') }}</label>
+                        <p v-if="!billinginfo.lname.isvalid">{{ $t('checkoutPage.forms.lnameerror') }}</p>
                       </div>
                     </div>
                     <div class="form-floating address" :class='{invalid: !billinginfo.address.isvalid}'>
-                      <input type="text" class="form-control" id="address" placeholder="Address" v-model.trim="billinginfo.address.val" @blur="clearValidatebilling('address')" @keyup="clearValidatebilling('address')">
-                      <label for="address">Address</label>
-                      <p v-if="!billinginfo.address.isvalid">Address must not be empty</p>
+                      <input type="text" class="form-control" id="address" :placeholder='$t("checkoutPage.placeholders.address")' v-model.trim="billinginfo.address.val" @blur="clearValidatebilling('address')" @keyup="clearValidatebilling('address')">
+                      <label for="address">{{ $t('checkoutPage.forms.address') }}</label>
+                      <p v-if="!billinginfo.address.isvalid">{{ $t('checkoutPage.forms.addresserror') }}</p>
                     </div>
                     <div class="info">
                       <div class="form-floating" :class='{invalid: !billinginfo.city.isvalid, countrydiff: country.val !== "EG"}'>
-                        <input type="text" class="form-control" id="city" placeholder="City" v-model.trim="billinginfo.city.val" @blur="clearValidatebilling('city')" @keyup="clearValidatebilling('city')">
-                        <label for="city">City</label>
-                        <p v-if="!billinginfo.city.isvalid">City field must not be empty</p>
+                        <input type="text" class="form-control" id="city" :placeholder='$t("checkoutPage.placeholders.city")' v-model.trim="billinginfo.city.val" @blur="clearValidatebilling('city')" @keyup="clearValidatebilling('city')">
+                        <label for="city">{{ $t('checkoutPage.forms.city') }}</label>
+                        <p v-if="!billinginfo.city.isvalid">{{ $t('checkoutPage.forms.cityerror') }}</p>
                       </div>
                       <div class="form-floating" v-if="country.val === 'EG'" :class='{invalid: !billinginfo.gover.isvalid, countrydiff: country.val !== "EG"}'>
                         <select class="form-select" id="gover" aria-label="Floating label select example" v-model="billinginfo.gover.val">
@@ -454,21 +454,21 @@
                           <option value="JS">South Sinai</option>
                           <option value="SUZ">Suez</option>
                         </select>
-                        <label for="gover">Governorate</label>
-                        <p v-if="!billinginfo.gover.isvalid">Governorate must no be empty</p>
+                        <label for="gover">{{ $t('checkoutPage.forms.govern') }}</label>
+                        <p v-if="!billinginfo.gover.isvalid">{{ $t('checkoutPage.forms.governerror') }}</p>
                       </div>
                       <div class="form-floating" :class='{invalid: !billinginfo.postalcode.isvalid, countrydiff: country.val !== "EG"}'>
-                        <input type="text" class="form-control" id="postalcode" placeholder="Postal code" v-model.trim="billinginfo.postalcode.val" @blur="clearValidatebilling('postalcode')" @keyup="clearValidatebilling('postalcode')">
-                        <label for="postalcode">Postal code</label>
-                        <p v-if="!billinginfo.postalcode.isvalid">Postal code must not be empty</p>
+                        <input type="text" class="form-control" id="postalcode" :placeholder='$t("checkoutPage.placeholders.postalc")' v-model.trim="billinginfo.postalcode.val" @blur="clearValidatebilling('postalcode')" @keyup="clearValidatebilling('postalcode')">
+                        <label for="postalcode">{{ $t('checkoutPage.forms.postal') }}</label>
+                        <p v-if="!billinginfo.postalcode.isvalid">{{ $t('checkoutPage.forms.postalerror') }}</p>
                       </div>
                     </div>
                     <div class="form-floating phone" :class='{invalid: !billinginfo.phone.isvalid}'>
-                      <input type="number" class="form-control" id="Phone" placeholder="Phone (optional)" v-model.trim="billinginfo.phone.val" @blur="clearValidate('phone')" @keyup="clearValidatebilling('phone')">
-                      <label for="Phone">Phone (optional)</label>
+                      <input type="number" class="form-control" id="Phone" :placeholder='$t("checkoutPage.placeholders.phoneoptional")' v-model.trim="billinginfo.phone.val" @blur="clearValidate('phone')" @keyup="clearValidatebilling('phone')">
+                      <label for="Phone">{{ $t('checkoutPage.forms.phoneoptional') }}</label>
                       <font-awesome-icon icon="fa-regular fa-circle-question" />
-                      <span>In case we need to <br> contact you about your order</span>
-                      <p v-if="!billinginfo.phone.isvalid">Phone must not be empty</p>
+                      <span>I{{ $t('checkoutPage.forms.phonemass1') }} <br> {{ $t('checkoutPage.forms.phonemass2') }}</span>
+                      <p v-if="!billinginfo.phone.isvalid">{{ $t('checkoutPage.forms.phoneerror') }}</p>
                     </div>
                   </div>
                 </div>
@@ -479,11 +479,11 @@
           <hr>
           <div class="contact-footer">
             <div class="footer">
-              <router-link to="/refundPolicy">Refund policy</router-link>
-              <router-link to="/checkouts">Shipping policy</router-link>
-              <router-link to="/checkouts">Privacy policy</router-link>
-              <router-link to="/termsOfService">Terms of service</router-link>
-              <router-link to="/checkouts">Contact information</router-link>
+              <router-link to="/refundPolicy">{{ $t('checkoutPage.forms.footer.refund') }}</router-link>
+              <router-link to="/checkouts">{{ $t('checkoutPage.forms.footer.prpol') }}</router-link>
+              <router-link to="/checkouts">{{ $t('checkoutPage.product.shippingpol') }}</router-link>
+              <router-link to="/termsOfService">{{ $t('checkoutPage.forms.footer.terms') }}</router-link>
+              <router-link to="/checkouts">{{ $t('checkoutPage.forms.footer.contact') }}</router-link>
             </div>
           </div>
         </div>
@@ -660,14 +660,6 @@ export default {
     },
     validateForm () {
       this.formvalidation = true
-      if (this.fname.val === '') {
-        this.fname.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.email.val === '') {
-        this.email.isvalid.emptyvalid = false
-        this.formvalidation = false
-      }
       if ((this.email.val).match(/\w+@gmail.com/) && this.email.val !== '') {
         this.email.isvalid.emailvalid = true
         this.email.isvalid.emptyvalid = true
@@ -684,33 +676,39 @@ export default {
         this.email.isvalid.emptyvalid = false
         this.formvalidation = false
       }
-      if (this.lname.val === '') {
-        this.lname.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.city.val === '') {
-        this.city.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.gover.val === '') {
-        this.gover.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.phone.val === '') {
-        this.phone.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.postalcode.val === '') {
-        this.postalcode.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.address.val === '') {
-        this.address.isvalid = false
-        this.formvalidation = false
-      }
-      if (this.country.val === '') {
-        this.country.isvalid = false
-        this.formvalidation = false
+      if (this.delivery === 'ship') {
+        if (this.fname.val === '') {
+          this.fname.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.lname.val === '') {
+          this.lname.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.city.val === '') {
+          this.city.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.gover.val === '') {
+          this.gover.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.phone.val === '') {
+          this.phone.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.postalcode.val === '') {
+          this.postalcode.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.address.val === '') {
+          this.address.isvalid = false
+          this.formvalidation = false
+        }
+        if (this.country.val === '') {
+          this.country.isvalid = false
+          this.formvalidation = false
+        }
       }
       if (this.billingmethod === 'useadifferent') {
         if (this.billinginfo.fname.val === '') {
@@ -829,7 +827,11 @@ export default {
   },
   created () {
     this.loadCardData()
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 

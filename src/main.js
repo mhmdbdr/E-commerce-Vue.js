@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import router from './router'
 import store from './store/index'
+import i18n from './i18n'
 import App from './App.vue'
 import BaseSidebar from './components/Ui/BaseSidebar'
 import BaseSupmenu from './components/Ui/BaseSupmenu'
@@ -12,21 +13,22 @@ import editEx from './components/Ui/editEx'
 import thankupopup from './components/Ui/ThankYouPopup'
 import loadingPopup from './components/Ui/loadingPopup'
 
-import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faCartShopping, faBars, faMagnifyingGlass, faAngleLeft, faAngleRight, faArrowLeftLong, faArrowRightLong, faCheck, faPenToSquare, faCaretUp, faCaretDown, faShop, faTruckFast, faGhost, faHeartCircleCheck, faHeartCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faBars, faMagnifyingGlass, faAngleLeft, faAngleRight, faArrowLeftLong, faArrowRightLong, faCheck, faPenToSquare, faCaretUp, faCaretDown, faShop, faTruckFast, faGhost, faHeartCircleCheck, faHeartCirclePlus, faGlobe, faLanguage } from '@fortawesome/free-solid-svg-icons'
 import { faUser, faHeart, faCircleQuestion, faWindowRestore } from '@fortawesome/free-regular-svg-icons'
 import { faTwitter, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faCartShopping, faUser, faBars, faTwitter, faFacebookF, faInstagram, faMagnifyingGlass, faAngleLeft, faAngleRight, faArrowLeftLong, faArrowRightLong, faHeart, faCheck, faPenToSquare, faCircleQuestion, faCaretUp, faCaretDown, faShop, faTruckFast, faWindowRestore, faGhost, faHeartCircleCheck, faHeartCirclePlus)
+library.add(faCartShopping, faUser, faBars, faTwitter, faFacebookF, faInstagram, faMagnifyingGlass, faAngleLeft, faAngleRight, faArrowLeftLong, faArrowRightLong, faHeart, faCheck, faPenToSquare, faCircleQuestion, faCaretUp, faCaretDown, faShop, faTruckFast, faWindowRestore, faGhost, faHeartCircleCheck, faHeartCirclePlus, faGlobe, faLanguage)
 
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
 app.use(store)
+app.use(i18n)
 
 app.component('base-sidebar', BaseSidebar)
 app.component('base-supmenu', BaseSupmenu)

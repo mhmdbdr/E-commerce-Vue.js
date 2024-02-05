@@ -17,7 +17,11 @@ export default {
       this.$router.push('/')
       window.scrollTo(0, 0)
     }
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 

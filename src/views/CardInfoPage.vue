@@ -5,7 +5,7 @@
     <base-spinner class="spin" v-if="isLoading"></base-spinner>
     <div v-if="!isLoading" class="cardinfo row">
       <div class="img-container col-12 col-md-6">
-        <carousel v-bind="settings">
+        <carousel v-bind="settings" :dir="pageDir">
           <slide index='1'>
             <img src="http://dummyimage.com/1200x1200.png/FF0000/ffffff" alt="">
           </slide>
@@ -52,7 +52,7 @@
       <div class="info-container col-12 col-md-6">
         <div class="card-head d-flex justify-content-between">
           <h2>{{ setData.product_name }}</h2>
-          <div class="navarrow">
+          <div class="navarrow" dir="ltr">
             <div v-if="leftarrow" class="arrow" @click="arrownav('prev')">
               <font-awesome-icon icon="fa-solid fa-arrow-left-long"/>
             </div>
@@ -62,15 +62,15 @@
           </div>
         </div>
         <div class="price">
-          <span v-if="!(setData.discount === undefined)" class="cost">{{setData.price}}LE</span>
           <span>{{ setData.discount ?  (setData.price - setData.discount).toFixed(2) : setData.price }}LE</span>
+          <span v-if="!(setData.discount === undefined)" class="cost">{{setData.price}}LE</span>
         </div>
         <div class="description">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Ea possimus, adipisci in similique aliquid vero atque <br>  tempora alias asperiores dignissimos architecto <br>  rerum soluta officia ipsum doloribus <br>  doloremque earum tenetur dolore!</p>
         </div>
         <base-button v-if="setData.state ==='soldout'" type='basesec'>sold out</base-button>
         <div v-if="setData.state !=='soldout'" class="colors">
-          <div class="head">Colors: <span>{{ color }}</span></div>
+          <div class="head">{{ $t('cardInfoPage.colors') }} <span>{{ color }}</span></div>
           <div class="hec">
             <img @click="activesc($event,'color')" data-color='Black' src="http://dummyimage.com/1200x1200.png/000000/ffffff" alt="">
             <img @click="activesc($event,'color')" data-color='White' src="http://dummyimage.com/1200x1200.png/FFFFFF/000000" alt="">
@@ -84,7 +84,7 @@
           </div>
         </div>
         <div v-if="setData.state !=='soldout'" class="sizes">
-          <div class="head">Size: <span>{{ size }}</span></div>
+          <div class="head">{{ $t('cardInfoPage.size') }} <span>{{ size }}</span></div>
           <div class="hec">
             <div @click="activesc($event,'size')" data-size='S' class="size active">S</div>
             <div @click="activesc($event,'size')" data-size='M' class="size">M</div>
@@ -97,34 +97,34 @@
         <div v-if="setData.state !=='soldout'" class="controls">
           <div class="cartbtns">
             <div class="inpcont">
-              <input class="form-control" min="1" step="1" type="number" placeholder="" v-model="count">
+              <input class="form-control" min="1" step="1" type="number" v-model="count">
             </div>
-          <base-button @click="addToCart" type='main'>Add to cart</base-button>
+          <base-button @click="addToCart('addToCart')" type='main'>{{ $t('cardInfoPage.addtcard') }}</base-button>
           <main-popup :prodTitle='setData.product_name' :prodImg='setData.main_image' :show='popupshow'></main-popup>
           </div>
           <div class="buybtn">
-            <base-button @click="buyitNow" type='sec'>buy it now</base-button>
+            <base-button @click="addToCart('buyItNow')" type='sec'>{{ $t('cardInfoPage.buytnow') }}</base-button>
           </div>
         </div>
         <div v-if="setData.state !=='soldout'" class="pickup">
           <div class="text d-flex">
           <font-awesome-icon icon="fa-solid fa-check" style="color: #108043;" />
-          <p>PICKUP AVAILABLE AT <span>ONLINE STORE</span> <br> Usually ready in 24 hours</p>
+          <p>{{ $t('cardInfoPage.pickupp1') }} <span>{{ $t('cardInfoPage.pickupp2') }}</span> <br> {{ $t('cardInfoPage.pickupp3') }}</p>
           </div>
           <div class="storeinfo">
-          <span @click="carttoggle(viewinfo)">view store info</span>
+          <span @click="carttoggle(viewinfo)">{{ $t('cardInfoPage.viewinfo') }}</span>
             <base-sidebar :show ='viewinfo' name ='viewinfo'>
               <template v-slot:title>
                 <span class="prod_name">{{ setData.product_name }}</span>
                 <span class="prod_info">{{color}} / {{size}}</span>
               </template>
                 <template v-slot:default>
-                  <div class="head">online store</div>
+                  <div class="head">{{ $t('cardInfoPage.onlines') }}</div>
                   <div class="time">
                   <font-awesome-icon icon="fa-solid fa-check" style="color: #108043;" />
-                  <p>Pickup available, usually ready in 24 hours</p>
+                  <p>{{ $t('cardInfoPage.pickupp') }}</p>
                   </div>
-                  <p class="address">1 Mostafa El-Nahaas<br>1st Floor<br>C<br>Nasr City<br>4441525<br>Egypt<br>+20222737773</p>
+                  <p class="address">{{ $t('cardInfoPage.add1') }}<br>{{ $t('cardInfoPage.add2') }}<br>{{ $t('cardInfoPage.add3') }}<br>{{ $t('cardInfoPage.add4') }}<br>{{ $t('cardInfoPage.add5') }}<br>{{ $t('cardInfoPage.add6') }}<br>{{ $t('cardInfoPage.add7') }}</p>
                 </template>
             </base-sidebar>
           </div>
@@ -137,14 +137,14 @@
           <img src="../../imgs/cardInfoPage/size-chart.webp" alt="">
         </div>
         <div class="info col-12 col-md-6">
-          <h2>Size Chart</h2>
+          <h2>{{ $t('cardInfoPage.sizechart') }}</h2>
           <div class="para">
-            <span>chest</span>
-            <p>To measure the chest: First, put the product on a flat surface, then measure between the two ends below armhole.</p>
+            <span>{{ $t('cardInfoPage.chest') }}</span>
+            <p>{{ $t('cardInfoPage.chestp') }}</p>
           </div>
           <div class="para">
-            <span>length</span>
-            <p>To measure the length of the product: First, put the product on a flat surface, then measure from the highest point of the shoulder down to the products bottom hem.</p>
+            <span>{{ $t('cardInfoPage.length') }}</span>
+            <p>{{ $t('cardInfoPage.lengthp') }}</p>
           </div>
         </div>
       </div>
@@ -152,10 +152,10 @@
     <div v-if="!isLoading" class="container">
       <div class="Related-Products">
         <div class="head">
-          <h2>Related Products</h2>
+          <h2>{{ $t('cardInfoPage.related') }}</h2>
         </div>
         <div class="products">
-          <carousel v-bind="relatedCarSett" :breakpoints='breakpoints'>
+          <carousel v-bind="relatedCarSett" :breakpoints='breakpoints' :dir="pageDir">
             <slide v-for="product in relatedProducts.slice(0, 4)" :key="product.id">
               <base-card :name='product.product_name' :id='product.id' :price='product.price' :img='product.main_image' :state='product.state'></base-card>
             </slide>
@@ -177,7 +177,6 @@ export default {
     Slide,
     Navigation
   },
-  props: ['productid'],
   data () {
     return {
       settings: {
@@ -210,7 +209,6 @@ export default {
       color: 'Black',
       isLoading: false,
       count: 1,
-      popuploading: false,
       leftarrow: true,
       rightarrow: true
     }
@@ -219,13 +217,13 @@ export default {
     arrownav (dir) {
       const prodid = this.setData.id
       const data = this.$store.getters.mData
-      let name = null
+      let prod = null
       data.find((ele) => {
         if (ele.id === prodid) {
           if (dir === 'prev') {
-            name = data[(data.indexOf(ele)) - 1]
+            prod = data[(data.indexOf(ele)) - 1]
           } else {
-            name = data[(data.indexOf(ele)) + 1]
+            prod = data[(data.indexOf(ele)) + 1]
           }
           // left arrow check
           if (((data.indexOf(ele)) - 1) === 0 && dir === 'prev') {
@@ -239,12 +237,12 @@ export default {
           } else {
             this.rightarrow = true
           }
-          return name
+          return prod
         } else {
           return 0
         }
       })
-      this.$router.push(`/products/${name.product_name}`)
+      this.$router.push(`/products/${prod.product_name}?id=${prod.id}`)
     },
     arrownavcreated () {
       const prodid = this.setData.id
@@ -271,7 +269,7 @@ export default {
       try {
         await this.$store.dispatch('fetchData')
       } catch (error) {
-        this.error = error.message || 'something went wrong'
+        this.error = error.message || this.$i18n.t('errorAndNote.collectionPage.dataerror')
       }
       this.isLoading = false
     },
@@ -290,8 +288,7 @@ export default {
     carttoggle (name) {
       this.$store.dispatch('sidebar/openbtn', name)
     },
-    addToCart () {
-      this.popuploading = true
+    addToCart (val) {
       const cartBag = this.$store.getters['sidebar/cartBag']
       const sameele = cartBag.find((ele) => {
         return (ele.id === this.setData.id && ele.color === this.color && ele.size === this.size)
@@ -313,37 +310,20 @@ export default {
         this.$store.dispatch('sidebar/sameele', [this.count, sameele.cartId])
       }
       window.localStorage.setItem('cartProducts', JSON.stringify(this.$store.getters['sidebar/cartBag']))
-      this.$store.dispatch('popup/openbtn')
-    },
-    buyitNow () {
-      const cartBag = this.$store.getters['sidebar/cartBag']
-      const sameele = cartBag.find((ele) => {
-        return (ele.id === this.setData.id && ele.color === this.color && ele.size === this.size)
-      })
-      if (sameele === undefined) {
-        const addProduct = {
-          cartId: Math.random().toString(16).slice(2),
-          id: this.setData.id,
-          name: this.setData.product_name,
-          price: this.setData.price,
-          color: this.color,
-          img: this.setData.main_image,
-          count: this.count,
-          discount: this.setData.discount,
-          size: this.size
-        }
-        this.$store.dispatch('sidebar/newItemCart', addProduct)
+      if (val === 'addToCart') {
+        this.$store.dispatch('popup/openbtn')
       } else {
-        this.$store.dispatch('sidebar/sameele', [this.count, sameele.cartId])
+        this.$router.push('/checkouts')
       }
-      window.localStorage.setItem('cartProducts', JSON.stringify(this.$store.getters['sidebar/cartBag']))
-      this.$router.push('/checkouts')
     }
   },
   computed: {
+    pageDir () {
+      return this.$store.getters.pageDir
+    },
     setData () {
       const data = this.$store.getters.mData.find((ele) => {
-        return ele.product_name === this.productid
+        return Number(ele.id) === Number(this.$route.query.id)
       })
       return { ...data }
     },
@@ -366,7 +346,11 @@ export default {
   },
   updated () {
     this.arrownavcreated()
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 <style lang="scss" scoped>
@@ -421,10 +405,14 @@ export default {
             opacity: 0.7;
           }
           &.left{
-            left: -10px;
+          /*!rtl:begin:ignore*/
+            left: 0px;
+          /*!rtl:end:ignore*/
           }
           &.right{
-            right: -10px;
+          /*!rtl:begin:ignore*/
+            right: 0px;
+          /*!rtl:end:ignore*/
           }
           svg{
             color: #ffffff;
@@ -463,12 +451,16 @@ export default {
                 border-color: #505050;
               }
               &:first-of-type{
+              /*!rtl:begin:ignore*/
                 border-top-left-radius: 6px;
                 border-bottom-left-radius: 6px;
+              /*!rtl:end:ignore*/
               }
               &:last-of-type{
+                /*!rtl:begin:ignore*/
                 border-top-right-radius: 6px;
                 border-bottom-right-radius: 6px;
+                /*!rtl:end:ignore*/
               }
               svg{
                 font-size: 20px;
@@ -477,21 +469,23 @@ export default {
           }
         }
         .price{
+          display: flex;
           margin-bottom: 25px;
           font-weight: 500;
           span{
             font-size: 34px;
+            display: block;
             &.cost{
               position: relative;
-              padding-right: 14px;
-              margin-right: 7px;
+              padding-left: 14px;
+              margin-left: 14px;
               color: #ccc;
               &::before{
                 position: absolute;
                 content: '';
                 height: 22px;
                 width: 1px;
-                right: 0;
+                left: 0;
                 top: 50%;
                 transform: translateY(-50%);
                 background-color: #ccc;

@@ -4,7 +4,7 @@
     <div class="diver">
       <div class="content">
         <div class="head">
-          <h2>Terms of service</h2>
+          <h2>{{ $t('information.refundpol.head') }}</h2>
         </div>
         <div class="text">
           <div class="para">
@@ -56,6 +56,19 @@
     </div>
 </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+    }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
+}
+</script>
 
 <style lang="scss" scoped>
 .whitesp{

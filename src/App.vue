@@ -3,10 +3,17 @@
     <main-header></main-header>
       <router-view v-slot="{ Component }">
         <transition name="pagetrans">
-          <component :is="Component"></component>
+          <component :v-show="donemounted" @fullmounted='fullmounted' :is="Component"></component>
         </transition>
       </router-view>
     <the-footer></the-footer>
+    <div class="loading-page" v-if="!donemounted">
+      <div class="loading-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,13 +24,26 @@ import TheFooter from './components/Layout/TheFooter.vue'
 export default {
   data () {
     return {
+      donemounted: false
+    }
+  },
+  methods: {
+    fullmounted () {
+      this.donemounted = true
+      document.body.classList.remove('stop-scrolling')
     }
   },
   components: {
     MainHeader,
     TheFooter
   },
+  watch: {
+    '$i18n.locale': function (lang) {
+      document.querySelector('#app').classList = lang
+    }
+  },
   created () {
+    document.body.classList.add('stop-scrolling')
     if (window.localStorage.getItem('cartProducts') !== null) {
       this.$store.dispatch('sidebar/setCartBag', JSON.parse(window.localStorage.getItem('cartProducts')))
     }
@@ -31,6 +51,32 @@ export default {
       this.$store.dispatch('addtowishlist', { product: JSON.parse(window.localStorage.getItem('wishlist')), stt: 'reloaddata' })
     }
     this.$store.dispatch('auth/tryLogin')
+
+    // lang-start
+
+    const linkLang = document.querySelector('.main-font')
+
+    if (JSON.parse(window.localStorage.getItem('lang')) === 'ar') {
+      this.$i18n.locale = 'ar'
+      this.$store.dispatch('setLang', 'ar')
+      this.$store.dispatch('setCurrentLang', 'Arabic')
+      this.$store.dispatch('pageDir', 'rtl')
+      document.documentElement.dir = 'rtl'
+      document.documentElement.lang = 'ar'
+      linkLang.setAttribute('href', this.$store.getters.arFontHref)
+      document.body.style.fontFamily = 'Cairo , sans-serif'
+    } else {
+      this.$i18n.locale = 'en'
+      this.$store.dispatch('setLang', 'en')
+      this.$store.dispatch('setCurrentLang', 'English')
+      this.$store.dispatch('pageDir', 'ltr')
+      document.documentElement.dir = 'ltr'
+      document.documentElement.lang = 'en'
+      linkLang.setAttribute('href', this.$store.getters.enFontHref)
+      document.body.style.fontFamily = 'Poppins, sans-serif'
+    }
+
+    // lang-end
   }
 }
 </script>
@@ -52,8 +98,17 @@ export default {
     ul{
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 !important;
     }
+  }
+  .whitespacee{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 10000;
   }
   .stop-scrolling{
     height: 100%;
@@ -105,6 +160,40 @@ export default {
     }
   }
 }
+.loading-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 2000;
+  .loading-dots{
+    display: flex;
+    .dot{
+      display: block;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: #3ADB89;
+      margin: 0 10px;
+      z-index: 2001;
+      animation-name: dot-animation;
+      animation-duration: .3s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate-reverse;
+      &:nth-of-type(2){
+        animation-delay: .1s;
+      }
+      &:nth-of-type(3){
+        animation-delay: .2s;
+      }
+    }
+  }
+}
 .pagetrans-enter-from,
 .pagetrans-leave-to{
   opacity: 0;
@@ -116,5 +205,12 @@ export default {
 .pagetrans-enter-active,
 .pagetrans-leave-active{
   transition-duration: 0.3s;
+}
+@keyframes dot-animation {
+  0% {
+  }
+  100% {
+    transform: translateY(-20px)
+  }
 }
 </style>

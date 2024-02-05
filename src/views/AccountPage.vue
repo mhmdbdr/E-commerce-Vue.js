@@ -4,18 +4,18 @@
   <div class="contentpage">
     <div class="container">
         <div class="head">
-          <h3>MY ACCOUNT</h3>
+          <h3>{{ $t('accountPage.head') }}</h3>
         </div>
-        <span class="orderh">ORDER HISTORY</span>
+        <span class="orderh">{{ $t('accountPage.orderhis') }}</span>
         <div v-if="hasorders" class="content">
           <table class="table table-bordered table-hover">
             <thead class="thead-light">
               <tr>
-                <td class="col">order</td>
-                <td class="col">date</td>
-                <td class="col">payment status</td>
-                <td class="col">fulfillment status</td>
-                <td class="col">total</td>
+                <td class="col">{{ $t('accountPage.order') }}</td>
+                <td class="col">{{ $t('accountPage.date') }}</td>
+                <td class="col">{{ $t('accountPage.paymentstat') }}</td>
+                <td class="col">{{ $t('accountPage.fulfillment') }}</td>
+                <td class="col">{{ $t('accountPage.total') }}</td>
               </tr>
             </thead>
             <tbody>
@@ -30,8 +30,8 @@
           </table>
         </div>
         <div v-if="!hasorders && !isLoading" class="noorders">
-          <p >Your order history is currently empty.</p>
-          <span>Continue browsing <router-link to="/">here</router-link>.</span>
+          <p >{{ $t('accountPage.emptyhistory') }}.</p>
+          <span>{{ $t('accountPage.contbrowsing') }} <router-link to="/">{{ $t('accountPage.here') }}</router-link>.</span>
         </div>
         <base-spinner v-if="isLoading"></base-spinner>
     </div>
@@ -61,14 +61,18 @@ export default {
       try {
         await this.$store.dispatch('orders/fetchorders')
       } catch (error) {
-        this.errorMessage = error.message || 'load orders faild'
+        this.errorMessage = error.message || this.$i18n.t('errorAndNote.accountPage.loadorder')
       }
       this.isLoading = false
     }
   },
   created () {
     this.loadorders()
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 

@@ -4,17 +4,17 @@
   <div class="cart">
     <div class="container">
       <div class="head">
-        <h2>My Cart</h2>
+        <h2>{{ $t('cartPage.head') }}</h2>
       </div>
       <div v-if="getCartBag.length === 0" class="no-cartProducts">
-        <span class="empty">Your cart is currently empty.</span>
-        <span class="browsing">Continue browsing <router-link to="/">here</router-link>.</span>
+        <span class="empty">{{ $t('cartPage.emptycart') }}</span>
+        <span class="browsing">{{ $t('cartPage.continuebrows') }} <router-link to="/">{{ $t('cartPage.here') }}</router-link>.</span>
       </div>
       <div v-if="getCartBag.length !== 0" class="content row">
         <div class="products col-12 col-lg-8 col-md-7">
           <div class="products-head">
-            <span>product</span>
-            <span class="lspan">info</span>
+            <span>{{ $t('cartPage.prod') }}</span>
+            <span class="lspan">{{ $t('cartPage.info') }}</span>
           </div>
           <div class="products-content">
           <div class="products">
@@ -33,16 +33,16 @@
               </div>
               <div class="prodinfo">
                 <div class="cont">
-                  <span>Price:</span>
+                  <span>{{ $t('cartPage.price') }}</span>
                   <div class="prodprice">{{ product.discount ?  (product.price - product.discount).toFixed(2) : product.price }} LE</div>
                 </div>
                 <div class="cont">
-                  <span>Quantity:</span>
+                  <span>{{ $t('cartPage.quan') }}</span>
                   <div>{{ product.count}}</div>
                 </div>
               <div class="cont">
-                <span>Total: </span>
-                <div>{{ product.discount ?  ((product.price * product.count) - (product.discount * product.count)).toFixed(2) : product.price * product.count }} LE</div>
+                <span>{{ $t('cartPage.total') }} </span>
+                <div>{{ product.discount ?  ((product.price * product.count) - (product.discount * product.count)).toFixed(2) : (product.price * product.count).toFixed(2) }} LE</div>
               </div>
               </div>
               <div @click="removeproduct" :data-id='product.cartId' class="closebtn">X</div>
@@ -53,32 +53,32 @@
         </div>
         <div class="summary col-12 col-lg-4 col-md-5">
           <div class="content">
-            <span class="summaryhead">order summary</span>
+            <span class="summaryhead">{{ $t('cartPage.ordersum') }}</span>
             <div class="addcomments">
-              <span>Additional comments</span>
-              <textarea placeholder="Special instruction for seller"></textarea>
+              <span>{{ $t('cartPage.addcom') }}</span>
+              <textarea :placeholder = '$t("cartPage.commentplaceh")'></textarea>
             </div>
             <div class="total">
-              <span>total:</span>
+              <span>{{ $t('cartPage.total') }}</span>
               <span class="totalnum">{{ totalCartPrice }} LE</span>
             </div>
           </div>
           <div class="controls">
             <router-link to="/checkouts">
-              <base-button type='white-gray'>proceed to checkout</base-button>
+              <base-button type='white-gray'>{{ $t('cartPage.proceed') }}</base-button>
             </router-link>
             <router-link to="/">
-              <base-button type='main-rev'>continue shopping</base-button>
+              <base-button type='main-rev'>{{ $t('cartPage.contshopping') }}</base-button>
             </router-link>
           </div>
         </div>
       </div>
       <div class="Related-Products">
         <div class="head">
-          <h2>Related Products</h2>
+          <h2>{{ $t('cartPage.related') }}</h2>
         </div>
         <div class="products">
-          <carousel v-bind="relatedCarSett" :breakpoints='breakpoints'>
+          <carousel v-bind="relatedCarSett" :breakpoints='breakpoints' :dir="pageDir">
             <slide v-for="product in relatedProducts.slice(5, 13)" :key="product.id">
               <base-card :name='product.product_name' :id='product.id' :price='product.price' :img='product.main_image' :state='product.state'></base-card>
             </slide>
@@ -159,13 +159,14 @@ export default {
     }
   },
   computed: {
+    pageDir () {
+      return this.$store.getters.pageDir
+    },
     relatedProducts () {
-      const data = this.$store.getters.mData
-      return data
+      return this.$store.getters.mData
     },
     getCartBag () {
-      const cartBag = this.$store.getters['sidebar/cartBag']
-      return cartBag
+      return this.$store.getters['sidebar/cartBag']
     },
     deitele () {
       const ele = this.$store.getters['sidebar/cartBag'].find((ele) => {
@@ -192,7 +193,11 @@ export default {
   },
   created () {
     this.loadCardData()
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 

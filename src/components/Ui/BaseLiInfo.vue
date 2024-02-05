@@ -3,46 +3,46 @@
     <div v-if="show" class="main">
       <div v-if="menstate" class="row">
         <div class="col-2">
-          <span>TOPS</span>
+          <span>{{ $t('global.header.navList.men.top') }}</span>
           <ul>
-            <li><router-link class="arouter" to='/collections/T-shirts'>T-shirts</router-link></li>
-            <li><router-link class="arouter" to="/collections/Graphics">Graphics</router-link></li>
-            <li><router-link class="arouter" to="/collections/Grafit-tee">Grafit-tee</router-link></li>
-            <li><router-link class="arouter" to="/collections/Polo">Polo</router-link></li>
-            <li><router-link class="arouter" to="/collections/Shirts">Shirts</router-link></li>
-            <li><router-link class="arouter" to="/collections/Long-Sleeves">Long-Sleeves</router-link></li>
-            <li><router-link class="arouter" to="/collections/Hoodies">Hoodies</router-link></li>
-            <li><router-link class="arouter" to="/collections/Zippers">Zippers</router-link></li>
-            <li><router-link class="arouter" to="/collections/Pullovers">Pullovers</router-link></li>
-            <li><router-link class="arouter" to="/collections/Jackets & Coats">Jackets & Coats</router-link></li>
+            <li><router-link class="arouter" to='/collections/T-shirts'>{{ $t('global.header.navList.men.top1') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Graphics">{{ $t('global.header.navList.men.top2') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Grafit-tee">{{ $t('global.header.navList.men.top3') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Polo">{{ $t('global.header.navList.men.top4') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Shirts">{{ $t('global.header.navList.men.top5') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Long-Sleeves">{{ $t('global.header.navList.men.top6') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Hoodies">{{ $t('global.header.navList.men.top7') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Zippers">{{ $t('global.header.navList.men.top8') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Pullovers">{{ $t('global.header.navList.men.top9') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Jackets & Coats">{{ $t('global.header.navList.men.top10') }}</router-link></li>
           </ul>
         </div>
         <div class="col-2">
-          <span>Bottoms</span>
+          <span>{{ $t('global.header.navList.men.bottom') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/jeans">jeans</router-link></li>
-            <li><router-link class="arouter" to="/collections/Jogger">Jogger</router-link></li>
-            <li><router-link class="arouter" to="/collections/sweatPants">sweatPants</router-link></li>
+            <li><router-link class="arouter" to="/collections/jeans">{{ $t('global.header.navList.men.bottom1') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Jogger">{{ $t('global.header.navList.men.bottom2') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/sweatPants">{{ $t('global.header.navList.men.bottom3') }}</router-link></li>
           </ul>
-          <span>Shop All Men</span>
+          <span>{{ $t('global.header.navList.men.shopallmen') }}</span>
         </div>
         <div class="col-2">
-          <span>Jilbab</span>
+          <span>{{ $t('global.header.navList.men.jilbab') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/stabraq jilbab">stabraq jilbab</router-link></li>
+            <li><router-link class="arouter" to="/collections/stabraq jilbab">{{ $t('global.header.navList.men.jilbab1') }}</router-link></li>
           </ul>
-          <span>featured</span>
+          <span>{{ $t('global.header.navList.men.featured') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/New Arrivals">New Arrivals</router-link></li>
+            <li><router-link class="arouter" to="/collections/New Arrivals">{{ $t('global.header.navList.men.newarr') }}</router-link></li>
           </ul>
         </div>
         <div class="col-2">
-          <span>Accessories</span>
+          <span>{{ $t('global.header.navList.men.accessories') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/Socks">Socks</router-link></li>
-            <li><router-link class="arouter" to="/collections/wallet">wallet</router-link></li>
-            <li><router-link class="arouter" to="/collections/note book">note book</router-link></li>
-            <li><router-link class="arouter" to="/collections/Gift Card">Gift Card</router-link></li>
+            <li><router-link class="arouter" to="/collections/Socks">{{ $t('global.header.navList.men.accessories1') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/wallet">{{ $t('global.header.navList.men.accessories2') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/note book">{{ $t('global.header.navList.men.accessories3') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Gift Card">{{ $t('global.header.navList.men.accessories4') }}</router-link></li>
           </ul>
         </div>
         <div class="col-4 d-flex justify-content-center">
@@ -56,40 +56,39 @@
       </div>
       <div v-if="!menstate" class="row">
         <div class="col-2">
-          <span>TOPS</span>
+          <span>{{ $t('global.header.navList.women.top') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/Basics">Basics</router-link></li>
-            <li><router-link class="arouter" to="/collections/Graphics">Graphics</router-link></li>
-            <li><router-link class="arouter" to="/collections/Pullivers">Pullivers</router-link></li>
-            <li><router-link class="arouter" to="/collections/Zippers">Zippers</router-link></li>
-            <li><router-link class="arouter" to="/collections/Sweatshirts">Sweatshirts</router-link></li>
+            <li><router-link class="arouter" to="/collections/Basics">{{ $t('global.header.navList.women.top1') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Graphics">{{ $t('global.header.navList.women.top2') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Pullivers">{{ $t('global.header.navList.women.top3') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Zippers">{{ $t('global.header.navList.women.top4') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Sweatshirts">{{ $t('global.header.navList.women.top5') }}</router-link></li>
           </ul>
-          <span>Shop All women</span>
+          <span>{{ $t('global.header.navList.women.shopallwomen') }}</span>
           <ul>
-          </ul>
-        </div>
-        <div class="col-2">
-          <span>Bottoms</span>
-          <ul>
-            <li><router-link class="arouter" to="/collections/skirts">skirts</router-link></li>
-          </ul>
-          <span>Accessories</span>
-          <ul>
-            <li><router-link class="arouter" to="/collections/Scarf">Scarf</router-link></li>
-            <li><router-link class="arouter" to="/collections/Socks">Socks</router-link></li>
-            <li><router-link class="arouter" to="/collections/Notebooks">Notebooks</router-link></li>
-            <li><router-link class="arouter" to="/collections/Giftcard">Giftcard</router-link></li>
-            <li><router-link class="arouter" to="/collections/skirts">skirts</router-link></li>
           </ul>
         </div>
         <div class="col-2">
-          <span>Dresses & jumpsits</span>
+          <span>{{ $t('global.header.navList.women.bottom') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/Dress">Dress</router-link></li>
+            <li><router-link class="arouter" to="/collections/skirts">{{ $t('global.header.navList.women.bottom1') }}</router-link></li>
           </ul>
-          <span>featured</span>
+          <span>{{ $t('global.header.navList.women.accessories') }}</span>
           <ul>
-            <li><router-link class="arouter" to="/collections/New Arrivals">New Arrivals</router-link></li>
+            <li><router-link class="arouter" to="/collections/Scarf">{{ $t('global.header.navList.women.accessories1') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Socks">{{ $t('global.header.navList.women.accessories2') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Notebooks">{{ $t('global.header.navList.women.accessories3') }}</router-link></li>
+            <li><router-link class="arouter" to="/collections/Giftcard">{{ $t('global.header.navList.women.accessories4') }}</router-link></li>
+          </ul>
+        </div>
+        <div class="col-2">
+          <span>{{ $t('global.header.navList.women.dress') }}</span>
+          <ul>
+            <li><router-link class="arouter" to="/collections/Dress">{{ $t('global.header.navList.women.dress1') }}</router-link></li>
+          </ul>
+          <span>{{ $t('global.header.navList.women.featured') }}</span>
+          <ul>
+            <li><router-link class="arouter" to="/collections/New Arrivals">{{ $t('global.header.navList.women.featured1') }}</router-link></li>
           </ul>
         </div>
         <div class="col-6 d-flex justify-content-center">

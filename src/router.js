@@ -104,6 +104,9 @@ const router = createRouter({
 })
 
 router.beforeEach(function (to, from, next) {
+  store.dispatch('lastRoute', from.path)
+  store.dispatch('theheader/menslide', false)
+  store.dispatch('theheader/womenslide', false)
   if (!to.meta.reqAuth) {
     next()
   } else if (to.meta.reqAuth && store.getters['sidebar/cartBag'].length !== 0) {

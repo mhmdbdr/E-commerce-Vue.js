@@ -3,67 +3,67 @@
   <div class="whitesp d-block"></div>
   <div class="container">
     <div class="head">
-      <h3>ACCOUNT</h3>
+      <h3>{{ $t('accountRegister.head') }}</h3>
     </div>
     <div class="content">
       <div class="createacc">
         <div class="options">
-          <span>NEW CUSTOMER</span>
+          <span>{{ $t('accountRegister.newcus') }}</span>
         </div>
         <div class="info">
           <div class="signup">
-            <p>Register with us for a faster checkout, to track the status of your order and more.</p>
+            <p>{{ $t('accountRegister.signupp') }}</p>
           </div>
           <form @submit.prevent="">
             <div class="inputcont">
-            <label for="#fnamereg">First Name</label>
-              <input type="text" id="fnamereg" placeholder="First Name" v-model.trim="fname.value">
-              <p v-if="!fname.valid">first name must not be empty</p>
+            <label for="#fnamereg">{{ $t('accountRegister.fname') }}</label>
+              <input type="text" id="fnamereg" :placeholder='$t("accountRegister.placeholders.fname")' v-model.trim="fname.value">
+              <p v-if="!fname.valid">{{ $t('accountRegister.fnameerror') }}</p>
             </div>
             <div class="inputcont">
-              <label for="#lnamereg">Last Name</label>
-              <input type="text" id="lnamereg" placeholder="Last Name" v-model.trim="lname.value">
-              <p v-if="!lname.valid">last name must not be empty</p>
+              <label for="#lnamereg">{{ $t('accountRegister.lname') }}</label>
+              <input type="text" id="lnamereg" :placeholder='$t("accountRegister.placeholders.lname")' v-model.trim="lname.value">
+              <p v-if="!lname.valid">{{ $t('accountRegister.lnameerror') }}</p>
             </div>
             <div class="inputcont">
-              <label for="#emailreg">Your Email Address <span>*</span></label>
-              <input type="email" id="emailreg" placeholder="Your Email Address" v-model.trim="email.value">
-              <p v-if="!email.valid">email must be correct</p>
+              <label for="#emailreg">{{ $t('accountRegister.emailadd') }} <span>*</span></label>
+              <input type="email" id="emailreg" :placeholder='$t("accountRegister.placeholders.yemail")' v-model.trim="email.value">
+              <p v-if="!email.valid">{{ $t('accountRegister.enailadderror') }}</p>
             </div>
             <div class="inputcont">
-              <label for="#passwordreg">Your Password <span>*</span></label>
-              <input type="password" id="passwordreg" placeholder="Your Password" v-model.trim="password.value">
-              <p v-if="!password.valid">password must not be empty or less than 8 char</p>
+              <label for="#passwordreg">{{ $t('accountRegister.pass') }} <span>*</span></label>
+              <input type="password" id="passwordreg" :placeholder='$t("accountRegister.placeholders.ypass")' v-model.trim="password.value" autocomplete="on">
+              <p v-if="!password.valid">{{ $t('accountRegister.passerror') }}</p>
             </div>
             <p v-if="signuperrorvis" class="signinerror">{{ signupError }}</p>
-            <base-button @click="signup" type='main'>create an account</base-button>
+            <base-button @click="signup" type='main'>{{ $t('accountRegister.createacc') }}</base-button>
           </form>
         </div>
       </div>
       <div class="orhr">
-        <span>OR</span>
+        <span>{{ $t('accountRegister.or') }}</span>
       </div>
       <div class="login">
       <div class="options">
-        <span>RETURNING CUSTOMER</span>
+        <span>{{ $t('accountRegister.returner') }}</span>
       </div>
       <div class="loginform">
         <div class="signin">
-          <p>If you already have an account, enter your email and password information.</p>
+          <p>{{ $t('accountRegister.signinp') }}</p>
         </div>
         <form @submit.prevent="">
           <div class="inputcont">
-            <label for="#Emailadd">Email Address<span>*</span></label>
-            <input type="Email" id="Emailadd" placeholder="Email Address" v-model.trim="loginemail.value" @focus="inputfocus('email')">
-            <p v-if="!loginemail.valid">email must be correct</p>
+            <label for="#Emailadd">{{ $t('accountRegister.uemail') }}<span>*</span></label>
+            <input type="Email" id="Emailadd" :placeholder='$t("accountRegister.placeholders.emailadd")' v-model.trim="loginemail.value" @focus="inputfocus('email')">
+            <p v-if="!loginemail.valid">{{ $t('accountRegister.uemailerror') }}</p>
           </div>
           <div class="inputcont">
-            <label for="#passwordadd">Password<span>*</span></label>
-            <input type="password" id="passwordadd" placeholder="Password" v-model.trim="loginpassword.value" @focus="inputfocus('password')">
-            <p v-if="!loginpassword.valid">password must not be empty or less than 8 char</p>
+            <label for="#passwordadd">{{ $t('accountRegister.upass') }}<span>*</span></label>
+            <input type="password" id="passwordadd" :placeholder='$t("accountRegister.placeholders.passadd")' v-model.trim="loginpassword.value" @focus="inputfocus('password')" autocomplete="on">
+            <p v-if="!loginpassword.valid">{{ $t('accountRegister.upasserror') }}</p>
           </div>
           <p v-if="signinerrorvis" class="signinerror">{{ signinError }}</p>
-          <base-button @click="signin" type='main-rev'>login</base-button>
+          <base-button @click="signin" type='main-rev'>{{ $t('accountRegister.login') }}</base-button>
         </form>
       </div>
       </div>
@@ -130,7 +130,11 @@ export default {
         try {
           await this.$store.dispatch('auth/signin', { email: this.loginemail.value, password: this.loginpassword.value })
           this.signinerrorvis = false
-          this.$router.replace('/Account')
+          if (this.$store.getters.lastRoute === '/checkouts') {
+            this.$router.replace('/checkouts')
+          } else {
+            this.$router.replace('/Account')
+          }
         } catch (error) {
           this.signinError = error.message
           this.signinerrorvis = true
@@ -187,7 +191,11 @@ export default {
         this.loginpassword.valid = true
       }
     }
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 

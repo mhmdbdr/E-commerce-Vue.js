@@ -12,11 +12,11 @@
         </div>
         <div class="prodcontent">
           <slot name="prodTitle">
-            <p><span>{{ prodTitle }}</span> is added to your shopping cart.</p>
+            <p><span>{{ prodTitle }}</span> {{ $t('ui.popup.added') }}</p>
           </slot>
           <div class="btns">
-            <base-button @click="closebar" type='main-rev'>continue shopping</base-button>
-            <base-button @click="cartPage" type='main-rev'>go to cart</base-button>
+            <base-button @click="closebar" type='main-rev'>{{ $t('ui.popup.continueshopping') }}</base-button>
+            <base-button @click="cartPage" type='main-rev'>{{ $t('ui.popup.gotocart') }}</base-button>
           </div>
         </div>
       </div>

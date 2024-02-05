@@ -6,7 +6,7 @@
       <div @click="closebar" class="closebtn">X</div>
       <div class="content">
         <div class="head">
-          <div class="headcont">product options</div>
+          <div class="headcont">{{ $t('ui.editex.prodoptions') }}</div>
         </div>
         <div class="options">
           <div class="cartProduct row gx-5">
@@ -26,16 +26,16 @@
                   </div>
                 </div>
                 <div class="quantity">
-                  <span>Quantity:</span>
+                  <span>{{ $t('ui.editex.editquan') }}</span>
                   <div class="inpcont">
-                    <input class="form-control" min="1" step="1" type="number" placeholder="" v-model="editcount">
+                    <input class="form-control" min="1" step="1" type="number" v-model="editcount">
                   </div>
                 </div>
               </div>
             </div>
             <div class="cs col-12 col-md-7">
               <div class="colors">
-                <div class="head">Colors: <span>{{ editcolor }}</span></div>
+                <div class="head">{{ $t('ui.editex.editcolor') }} <span>{{ editcolor }}</span></div>
                 <div class="hecex">
                   <img @click="activesc($event,'color')" data-color='Black' src="http://dummyimage.com/1200x1200.png/000000/ffffff" alt="">
                   <img @click="activesc($event,'color')" data-color='White' src="http://dummyimage.com/1200x1200.png/FFFFFF/000000" alt="">
@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="sizes">
-                <div class="head">Size: <span>{{ editsize }}</span></div>
+                <div class="head">{{ $t('ui.editex.editsize') }} <span>{{ editsize }}</span></div>
                 <div class="hecex">
                   <div @click="activesc($event,'size')" data-size='S' class="size active">S</div>
                   <div @click="activesc($event,'size')" data-size='M' class="size">M</div>
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="supmit">
-          <base-button @click="EditedProd" type='main'>add to cart</base-button>
+          <base-button @click="EditedProd" type='main'>{{ $t('ui.editex.addtocart') }}</base-button>
         </div>
       </div>
     </div>

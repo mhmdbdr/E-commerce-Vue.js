@@ -6,48 +6,47 @@
           <router-link class="logo" to="/">
             <img src="../../../imgs\secicon.png" alt="">
           </router-link>
-          <p class="mb-2">Stabraq Trendsetters is an all-Egyptian clothes brand. Driven by self-expression, we strive to reflect our beliefs through high quality, multi-featured products and effective and inspiring movements.
-          </p>
+          <p class="mb-2">{{ $t('global.footer.disc.disc1') }}</p>
           <p>
-            Address: 1 Mostafa El-Nahaas, Nasr City<br>
-            Call us at: 01123399345 <br>
-            Email: info@stabraq.com
+            {{ $t('global.footer.disc.dics2') }}<br>
+            {{ $t('global.footer.disc.dics3') }}<br>
+            {{ $t('global.footer.disc.dics4') }}
           </p>
         </div>
         <div class="col-12 col-md-3 pb-2 execp maind">
           <div class="">
-            <span class="">SHOP</span>
+            <span class="">{{ $t('global.footer.shop') }}</span>
             <ul>
               <li>
-                <router-link class="arouter" to="/collections/MEN">Men</router-link>
+                <router-link class="arouter" to="/collections/MEN">{{ $t('global.header.nav.men') }}</router-link>
               </li>
               <li>
-                <router-link class="arouter" to="/collections/WOMEN">Women</router-link>
+                <router-link class="arouter" to="/collections/WOMEN">{{ $t('global.header.nav.women') }}</router-link>
               </li>
               <li>
-                <router-link class="arouter" to="/collections/KIDS">Kids</router-link>
+                <router-link class="arouter" to="/collections/KIDS">{{ $t('global.header.nav.kids') }}</router-link>
               </li>
               <li>
-                <router-link class="arouter" to="/collections/ACCESSORIES">Accessories</router-link>
+                <router-link class="arouter" to="/collections/ACCESSORIES">{{ $t('global.header.nav.accessories') }}</router-link>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-12 col-md-3 pb-2 maind">
           <div class="">
-            <span class="">INFORMATION</span>
+            <span class="">{{ $t('global.footer.info') }}</span>
               <ul class="">
                 <li>
-                  <router-link class="arouter" to="/aboutUs">About Us</router-link>
+                  <router-link class="arouter" to="/aboutUs">{{ $t('global.footer.info1') }}</router-link>
                 </li>
                 <li>
-                  <router-link class="arouter" to="/contactUs">Contact Us</router-link>
+                  <router-link class="arouter" to="/contactUs">{{ $t('global.footer.info2') }}</router-link>
                 </li>
                 <li>
-                  <router-link class="arouter" to="/termsOfService">Terms Of Service</router-link>
+                  <router-link class="arouter" to="/termsOfService">{{ $t('global.footer.info3') }}</router-link>
                 </li>
                 <li>
-                  <router-link class="arouter" to="/refundPolicy">Refund Policy</router-link>
+                  <router-link class="arouter" to="/refundPolicy">{{ $t('global.footer.info4') }}</router-link>
                 </li>
               </ul>
             </div>
@@ -58,7 +57,7 @@
           <a @click.prevent="" href=""><font-awesome-icon icon="fa-brands fa-facebook-f" /></a>
           <a @click.prevent="" href=""><font-awesome-icon icon="fa-brands fa-instagram" /></a>
           </div>
-          <span>PAYMENT METHODS</span>
+          <span>{{ $t('global.footer.payment') }}</span>
           <div>
             <img class="me-3" src="../../../imgs/visa.webp" alt="">
             <img src="../../../imgs/mastercard.avif" alt="">
@@ -67,7 +66,7 @@
       </div>
       <div class="row">
         <div class="col-12 text-center py-4 rights">
-          2021 Stabraq TS Management Co. All Rights Reserved
+          {{ $t('global.footer.rights') }}
         </div>
       </div>
     </div>
@@ -162,16 +161,4 @@ export default {
     padding-bottom: 13px;
     margin: 0;
   }
-//   .maind{
-//     .dropdown{
-//       .dropdown-menu{
-//         position: relative !important;
-//         border: none;
-//         background-color: #f8f8f8;
-//         .arouter{
-//           padding-left: 0;
-//         }
-//       }
-//   }
-// }
 </style>

@@ -34,6 +34,7 @@ export default {
   width: 100px;
   height: 100px;
 }
+/*! rtl:begin:ignore */
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform-origin: 40px 40px;
@@ -112,4 +113,5 @@ export default {
     transform: rotate(360deg);
   }
 }
+/*! rtl:end:ignore */
 </style>

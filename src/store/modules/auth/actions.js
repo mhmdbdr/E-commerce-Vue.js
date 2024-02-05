@@ -1,7 +1,9 @@
+import i18n from '../../../i18n'
+
 let timer
 export default {
   async signup (context, payload) {
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAEiv-PrKG_3J18YdgMlBT7wiLBKgUbH6c', {
+    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDi3O8ofYEFjkn10raFxNbnFGSbhImAp9Y', {
       method: 'POST',
       body: JSON.stringify({
         email: payload.email,
@@ -11,7 +13,7 @@ export default {
     })
     const responseData = await response.json()
     if (!response.ok) {
-      const error = new Error(responseData.message || 'Something went wrong please try again later')
+      const error = new Error(responseData.message || i18n.global.t('errorAndNote.store.authModule.signupfiled'))
       throw error
     } const expiresIn = +responseData.expiresIn * 1000
     const expirationDate = new Date().getTime() + expiresIn
@@ -27,7 +29,7 @@ export default {
     })
   },
   async signin (context, payload) {
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAEiv-PrKG_3J18YdgMlBT7wiLBKgUbH6c', {
+    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDi3O8ofYEFjkn10raFxNbnFGSbhImAp9Y', {
       method: 'POST',
       body: JSON.stringify({
         email: payload.email,
@@ -37,7 +39,7 @@ export default {
     })
     const responseData = await response.json()
     if (!response.ok) {
-      const error = new Error(responseData.message || 'Incorrect email address or password, please try again')
+      const error = new Error(responseData.message || i18n.global.t('errorAndNote.store.authModule.signinfiled'))
       throw error
     } const expiresIn = +responseData.expiresIn * 1000
     const expirationDate = new Date().getTime() + expiresIn

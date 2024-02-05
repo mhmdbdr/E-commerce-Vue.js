@@ -3,9 +3,9 @@
 <transition name="slidebar">
   <div v-if="show" class="sidebar col-10 col-xl-3 col-lg-4 col-md-5">
     <div class="closebtn">
-      <div @click="closebar" >
+      <div @click="closebar" dir="ltr">
         <span class="xcar">X</span>
-        <span >CLOSE</span>
+        <span >{{ $t('ui.basesidebar.close') }}</span>
       </div>
     </div>
     <h5>
@@ -67,7 +67,9 @@ export default {
   }
 }
 .xcar{
+  /*!rtl:begin:ignore*/
   margin-right: 5px;
+  /*!rtl:end:ignore*/
   font-size: 16px;
 }
 .shadow{

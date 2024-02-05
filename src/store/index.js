@@ -24,7 +24,13 @@ const store = createStore({
   state () {
     return {
       mData: [],
-      wishlist: []
+      wishlist: [],
+      pageDir: 'ltr',
+      lang: 'en',
+      currentLang: 'English',
+      enFontHref: 'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap',
+      arFontHref: 'https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap',
+      lastRoute: ''
     }
   },
   getters,

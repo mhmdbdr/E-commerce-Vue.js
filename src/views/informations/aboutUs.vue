@@ -4,17 +4,29 @@
   <div class="container">
     <div class="content">
       <div class="head">
-        <h2>ABOUT US</h2>
+        <h2>{{ $t('information.aboutus.head') }}</h2>
       </div>
       <div class="text">
-        <p>Stabraq Trendsetters is the number one detail oriented all-Egyptian clothes brand.</p>
-        <p>Driven by self-expression, we strive to reflect our beliefs through high quality, multi-featured products and effective and inspiring movements.</p>
-        <p>Check out this video to get an idea of who we are, and how we work.</p>
+        <p>{{ $t('information.aboutus.text1') }}</p>
+        <p>{{ $t('information.aboutus.text2') }}</p>
+        <p>{{ $t('information.aboutus.text3') }}</p>
       </div>
     </div>
   </div>
 </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+    }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
+}
+</script>
 
 <style lang="scss" scoped>
 .whitesp{

@@ -17,5 +17,17 @@ export default {
       }
       window.localStorage.setItem('wishlist', JSON.stringify(state.wishlist))
     }
+  },
+  setLang (state, payload) {
+    state.lang = payload
+  },
+  setCurrentLang (state, payload) {
+    state.currentLang = payload
+  },
+  pageDir (state, payload) {
+    state.pageDir = payload
+  },
+  lastRoute (state, payload) {
+    state.lastRoute = payload
   }
 }

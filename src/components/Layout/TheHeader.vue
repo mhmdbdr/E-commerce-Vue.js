@@ -2,7 +2,7 @@
   <div v-if="!checkoutpage" :class="issticky">
     <div class="container">
       <nav class="navbar bg-body-tertiory d-flex justify-content-between">
-        <router-link v-if="!mdheader" to="/" class="navbar-brand logo passed">LOGO</router-link>
+        <router-link v-if="!mdheader" to="/" class="logo navbar-brand passed">{{ $t('global.header.logo') }}</router-link>
         <div v-if="mdheader" class="left-header">
           <font-awesome-icon @click="menutoggle" icon="fa-solid fa-bars" />
           <base-menu :show="mainmenustate">
@@ -16,24 +16,24 @@
         </div>
         <div v-if="!mdheader" class="navbar-nav">
         <ul class="d-flex align-items-center m-0">
-          <li @mouseover="menslide = true" @mouseleave="menslide = false" @click="menslide = false" class="nav-item">
-            <router-link class="nav-link mx-3 passed arouter setu" to="/collections/MEN">Men</router-link>
-              <base-liinfo :menstate="true" :show='menslide'></base-liinfo>
+          <li @mouseover="setSlideValmen(true)" @mouseleave="setSlideValmen(false)" class="nav-item">
+            <router-link class="nav-link mx-3 passed arouter setu" to="/collections/MEN">{{ $t('global.header.nav.men') }}</router-link>
+              <base-liinfo :menstate="true" :show='baselimenval'></base-liinfo>
           </li>
-          <li @mouseover="womenslide = true" @mouseleave="womenslide = false" @click="womenslide = false" class="nav-item">
-            <router-link class="nav-link mx-3 passed arouter setu" to="/collections/WOMEN">Women</router-link>
-              <base-liinfo :menstate="false" :show='womenslide' ></base-liinfo>
+          <li @mouseover="setSlideValwom(true)" @mouseleave="setSlideValwom(false)" class="nav-item">
+            <router-link class="nav-link mx-3 passed arouter setu" to="/collections/WOMEN">{{ $t('global.header.nav.women') }}</router-link>
+              <base-liinfo :menstate="false" :show='baseliwomval' ></base-liinfo>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link mx-3 passed arouter setu btn dropdown-toggle" href='/collections/KIDS' data-bs-hover='dropdown' aria-expanded='false'>Kids</a>
+            <a class="nav-link mx-3 passed arouter setu btn dropdown-toggle" href='/collections/KIDS' data-bs-hover='dropdown' aria-expanded='false'>{{ $t('global.header.nav.kids') }}</a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li class="dropdown-item"><router-link class="" to="/collections/Graphics">Graphics</router-link></li>
-              <li class="dropdown-item"><router-link class="" to="/collections/Zippers">Zippers</router-link></li>
-              <li class="dropdown-item"><router-link class="" to="/collections/Pants">Pants</router-link></li>
+              <li class="dropdown-item"><router-link class="" to="/collections/Graphics">{{ $t('global.header.navList.kids.top1') }}</router-link></li>
+              <li class="dropdown-item"><router-link class="" to="/collections/Zippers">{{ $t('global.header.navList.kids.top2') }}</router-link></li>
+              <li class="dropdown-item"><router-link class="" to="/collections/Pants">{{ $t('global.header.navList.kids.top3') }}</router-link></li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link mx-3 passed arouter aces" to="/collections/ACCESSORIES">Accessories</router-link>
+            <router-link class="nav-link mx-3 passed arouter aces" to="/collections/ACCESSORIES">{{ $t('global.header.nav.accessories') }}</router-link>
           </li>
         </ul>
         </div>
@@ -42,8 +42,18 @@
             <img class="mdlogo" src="../../../imgs/secicon.png" alt="">
           </router-link>
         </div>
-        <div class="details">
+        <div class="details" aria-label="Default select example">
           <ul class="d-flex align-items-center m-0 p-0">
+            <div v-if="!mdheader" class="dropdown ">
+              <span class="lang-btn dropdown-toggle" type="button" id="lang-DropdownBtn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <font-awesome-icon icon="fa-solid fa-globe" />
+                {{ currentLang }}
+              </span>
+              <div class="dropdown-menu" aria-labelledby="lang-DropdownBtn">
+                <a @click.prevent="changeLang('en')" class="dropdown-item" href="#">English</a>
+                <a @click.prevent="changeLang('ar')" class="dropdown-item" href="#">Arabic</a>
+              </div>
+            </div>
             <li v-if="!mdheader"  class="nav-item leftic">
               <router-link to="/Collections/wishlist">
                 <font-awesome-icon  class="favicon" icon="fa-regular fa-heart" />
@@ -55,35 +65,35 @@
             <li class="nav-item profile">
               <font-awesome-icon @click="carttoggle('profile')" class="passed" icon="fa-regular fa-user" />
                 <base-sidebar @reset-sidebar-data='resetsidebar' :show ='sideststeprofile' name ='profile'>
-                  <template v-slot:title>CUSTOMER LOGIN:</template>
+                  <template v-slot:title>{{ $t('global.header.profile.login.header') }}</template>
                   <template v-if="!loginstate" v-slot:default>
                     <form @submit.prevent="">
                       <div class="inputcont">
-                        <label for="#Emailadd">Email Address<span>*</span></label>
-                        <input type="Email" id="Emailadd" placeholder="Email Address" v-model.trim="email.value" @focus="inputfocus('email')">
-                        <p v-if="!email.valid">email must be correct</p>
+                        <label for="#Emailadd">{{ $t('global.header.profile.login.eInput') }} <span>*</span></label>
+                        <input type="Email" id="Emailadd" :placeholder='$t("global.header.placeholders.email")' v-model.trim="email.value" @focus="inputfocus('email')">
+                        <p v-if="!email.valid">{{ $t('global.header.profile.login.evalid') }}</p>
                       </div>
                       <div class="inputcont">
-                        <label for="#passwordadd">Password<span>*</span></label>
-                        <input type="password" id="passwordadd" placeholder="Password" v-model.trim="password.value" @focus="inputfocus('password')">
-                        <p v-if="!password.valid">password must not be empty or less than 8 char</p>
+                        <label for="#passwordadd">{{ $t('global.header.profile.login.pInput') }} <span>*</span></label>
+                        <input type="password" id="passwordadd" :placeholder='$t("global.header.placeholders.pass")' v-model.trim="password.value" @focus="inputfocus('password')" autocomplete="on">
+                        <p v-if="!password.valid">{{ $t('global.header.profile.login.pvalid') }}</p>
                       </div>
                       <p v-if="signinerrorvis" class="signinerror">{{ signinError }}</p>
-                      <base-button @click="signin" type='main'>login</base-button>
+                      <base-button @click="signin" type='main'>{{ $t('global.header.profile.login.loginInput') }}</base-button>
                     </form>
                       <span class="forgotpass">
-                        <span class="arouter">Forgot your password?</span>
+                        <span class="arouter">{{ $t('global.header.profile.login.forgotP') }}</span>
                       </span>
                       <router-link to="/AccountRegister">
-                        <base-button type='main-rev'>create an account</base-button>
+                        <base-button type='main-rev'>{{ $t('global.header.profile.login.createBtn') }}</base-button>
                       </router-link>
                   </template>
                   <template v-else-if="loginstate" v-slot:default>
                     <div class="btns">
                       <router-link to="/Account">
-                        <base-button type='main'>my account</base-button>
+                        <base-button type='main'>{{ $t('global.header.profile.logout.myacc') }}</base-button>
                       </router-link>
-                      <base-button @click='logout' type='main-rev'>log out</base-button>
+                      <base-button @click='logout' type='main-rev'>{{ $t('global.header.profile.logout.logoutBtn') }}</base-button>
                     </div>
                   </template>
                 </base-sidebar>
@@ -91,17 +101,17 @@
             <li class="nav-item cart-container">
               <div class="cart">
                 <font-awesome-icon @click="carttoggle('cart')" class="rightic passed" icon="fa-solid fa-cart-shopping" />
-                <span @click="carttoggle('cart')">{{ getcartnum }}</span>
+                <span @click="carttoggle('cart')">{{ cartBagItems.length }}</span>
               </div>
                 <base-sidebar :show ='sideststecart' name ='cart'>
-                  <template v-slot:title>your bag</template>
+                  <template v-slot:title>{{ $t('global.header.cart.emptyCart.header') }}</template>
                   <template v-slot:default>
-                    <div v-if="getcartnum === 0" class="empty-tem">
-                      <span class="emptycart">Your cart is currently empty.</span>
-                      <base-button @click="closesidebar('cart')" type='main-rev'>continue shopping</base-button>
+                    <div v-if="cartBagItems.length === 0" class="empty-tem">
+                      <span class="emptycart">{{ $t('global.header.cart.emptyCart.pEmpty') }}</span>
+                      <base-button @click="closesidebar('cart')" type='main-rev'>{{ $t('global.header.cart.emptyCart.continueBtn') }}</base-button>
                     </div>
-                    <div v-if="getcartnum !== 0" class="cart-products">
-                      <span class="items-count">{{ getcartnum }} items</span>
+                    <div v-if="cartBagItems.length !== 0" class="cart-products">
+                      <span class="items-count">{{ cartBagItems.length + ' ' + $t('global.header.cart.fullCart.items')}}</span>
                       <div class="products">
                         <div v-for="product in cartBagItems" :key="product.id" class="product">
                           <div class="prodimg">
@@ -114,7 +124,7 @@
                               <font-awesome-icon @click="openeditpopup(product.cartId)" icon="fa-solid fa-pen-to-square"/>
                             </div>
                             <div class="quan">
-                              <span>Quantity: {{ product.count}}</span>
+                              <span>{{ $t('global.header.cart.fullCart.quant') + product.count}}</span>
                             </div>
                             <div class="prodprice">{{ product.discount ?  (product.price - product.discount).toFixed(2) : product.price }} LE</div>
                           </div>
@@ -125,17 +135,21 @@
                       <div class="controls">
                         <div class="products-info">
                           <div class="total">
-                            <span class="tit">Total</span>
+                            <span class="tit">{{ $t('global.header.cart.fullCart.total') }}</span>
                             <span class="total-num">{{ totalCartPrice }} LE</span>
                           </div>
                           <div class="shipping">
-                            <span class="tit">Shipping</span>
-                            <span class="taxes">Taxes and shipping fee will be calculated at checkout</span>
+                            <span class="tit">{{ $t('global.header.cart.fullCart.shippingtitle') }}</span>
+                            <span class="taxes">{{ $t('global.header.cart.fullCart.shippingtaxes') }}</span>
                           </div>
                         </div>
                         <div class="btns">
-                          <base-button @click="checkouts" type='gray-white'>check out</base-button>
-                          <base-button @click="cartLink" type='main-rev'>view cart</base-button>
+                          <router-link to='/checkouts'>
+                            <base-button type='gray-white'>{{ $t('global.header.cart.fullCart.checkout') }}</base-button>
+                          </router-link>
+                          <router-link to='/cart'>
+                            <base-button type='main-rev'>{{ $t('global.header.cart.fullCart.viewcart') }}</base-button>
+                          </router-link>
                         </div>
                       </div>
                     </div>
@@ -163,7 +177,7 @@
   <div v-if="checkoutpage" class="checkouts">
     <div class="container">
       <div class="checkout-header">
-        <router-link to="/" class="logo">LOGO</router-link>
+        <router-link to="/" class="logo">{{ $t('global.header.logo') }}</router-link>
         <router-link to="/cart">
           <font-awesome-icon icon="fa-solid fa-cart-shopping" />
         </router-link>
@@ -173,6 +187,7 @@
 </template>
 
 <script>
+
 import baseLiinfo from '../Ui/BaseLiInfo.vue'
 import BaseSidebar from '../Ui/BaseSidebar.vue'
 import BaseMenu from '../Ui/BaseMenu.vue'
@@ -203,19 +218,55 @@ export default {
       signinError: '',
       isLoading: false,
       logoutError: '',
-      signinerrorvis: false
+      signinerrorvis: false,
+      loadSpinLangError: ''
     }
   },
   methods: {
-    async logout () {
+    setSlideValmen (val) {
+      this.$store.dispatch('theheader/menslide', val)
+    },
+    setSlideValwom (val) {
+      this.$store.dispatch('theheader/womenslide', val)
+    },
+    async changeLang (lang) {
+      const linkLang = document.querySelector('.main-font')
       this.isLoading = true
+      try {
+        if (lang === 'en') {
+          this.$i18n.locale = lang
+          this.$store.dispatch('setLang', 'en')
+          this.$store.dispatch('setCurrentLang', 'English')
+          this.$store.dispatch('pageDir', 'ltr')
+          document.documentElement.dir = 'ltr'
+          document.documentElement.lang = 'en'
+          linkLang.setAttribute('href', this.$store.getters.enFontHref)
+          document.body.style.fontFamily = 'Poppins, sans-serif'
+        } else {
+          this.$i18n.locale = lang
+          this.$store.dispatch('setLang', 'ar')
+          this.$store.dispatch('setCurrentLang', 'Arabic')
+          this.$store.dispatch('pageDir', 'rtl')
+          document.documentElement.dir = 'rtl'
+          document.documentElement.lang = 'ar'
+          linkLang.setAttribute('href', this.$store.getters.arFontHref)
+          document.body.style.fontFamily = 'Cairo , sans-serif'
+        }
+        window.localStorage.setItem('lang', JSON.stringify(lang))
+      } catch (error) {
+        this.loadSpinLangError = error || this.$i18n.t('errorAndNote.header.loadSpinLangError')
+      }
+      this.isLoading = false
+    },
+    async logout () {
+      this.isLoading = false
       try {
         this.$store.dispatch('auth/logout')
         if (this.$route.path === '/Account') {
           this.$router.replace('/')
         }
       } catch (error) {
-        this.logoutError = error || 'logout went wrong'
+        this.logoutError = error || this.$i18n.t('errorAndNote.header.logoutError')
       }
       this.isLoading = false
     },
@@ -263,12 +314,6 @@ export default {
       } else {
         this.$store.dispatch('theheader/closesearch')
       }
-    },
-    checkouts () {
-      this.$router.push('/checkouts')
-    },
-    cartLink () {
-      this.$router.push('/cart')
     },
     closesidebar (name) {
       this.$store.dispatch('sidebar/closebtn', name)
@@ -327,11 +372,6 @@ export default {
         this.scrolly = window.scrollY
       }
     },
-    passedcolor (color) {
-      document.querySelectorAll('.passed').forEach((pass) => {
-        pass.style.color = color
-      })
-    },
     selectedheader () {
       if (window.innerWidth < 1200) {
         this.mdheader = true
@@ -356,6 +396,15 @@ export default {
     }
   },
   computed: {
+    baseliwomval () {
+      return this.$store.getters['theheader/womenslide']
+    },
+    baselimenval () {
+      return this.$store.getters['theheader/menslide']
+    },
+    currentLang () {
+      return this.$store.getters.currentLang
+    },
     loginstate () {
       const userid = this.$store.getters['auth/userId']
       if (userid === null) {
@@ -396,10 +445,6 @@ export default {
     cartBagItems () {
       return this.$store.getters['sidebar/cartBag']
     },
-    getcartnum () {
-      const bag = this.$store.getters['sidebar/cartBag']
-      return bag.length
-    },
     mainmenustate () {
       return this.$store.getters['mainmenu/closemmenu']
     },
@@ -411,13 +456,10 @@ export default {
     },
     issticky () {
       if (this.scrolly === 0 && this.mdheader === false && this.$route.path === '/') {
-        this.passedcolor('black')
         return 'contt'
       } else if (this.scrolly !== 0 && this.mdheader === false && this.$route.path === '/') {
-        this.passedcolor('black')
         return 'contt passed'
       } else if (this.$route.path !== '/' && this.mdheader === false) {
-        this.passedcolor('black')
         return 'contt passed'
       } else if (this.$route.path === '/' && this.mdheader === true) {
         return 'contt mdheader'
@@ -427,6 +469,15 @@ export default {
     },
     searchVal () {
       return this.$store.getters['theheader/searchVal']
+    }
+  },
+  watch: {
+    lang: function (lang) {
+      if (lang === 'en') {
+        this.$i18n.locale = 'en'
+      } else {
+        this.$i18n.locale = 'ar'
+      }
     }
   },
   beforeCreate () {
@@ -542,10 +593,11 @@ export default {
   a{
     text-decoration: none;
   }
-  .logo{
+  .navbar .logo,
+  .checkout-header .logo{
   font-size: 30px;
   font-weight: bold;
-  color: #202020;
+  color: #202020 !important;
   }
   .mdlogo{
     height: 25px;
@@ -687,7 +739,10 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        button:nth-child(1){
+        a{
+          width: 100%;
+        }
+        a:nth-child(1){
           margin-right: 10px;
         }
         button{
@@ -739,15 +794,41 @@ export default {
   .nav-link
   .navbar-brand{
     color: black;
+    font-size: 40px;
   }
   .nav-link.passed,
   .navbar-brand.passed{
     color: black;
   }
-  .dropdown:hover>.dropdown-menu {
-  display: block;
-}
 .details{
+  .dropdown{
+    span{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+      user-select: none;
+      min-width: 100px;
+      margin-inline-end: 20px;
+      border-radius: 6px;
+      padding: 0 15px;
+      transition-duration: 0.3s;
+      &.show{
+        background-color: #e7e8ea;
+      }
+      &:hover{
+        background-color: #e7e8ea;
+      }
+      svg{
+        margin-inline-end: 5px;
+        &::after{
+          margin-inline-end: 5px !important;
+        }
+      }
+    }
+  }
   form{
     .inputcont{
       display: flex;
@@ -806,7 +887,8 @@ export default {
     }
   }
 }
-.navbar-nav .dropdown-menu{
+.nav-item{
+  .dropdown-menu{
   position: absolute;
   border-radius: 0;
   left: 0;
@@ -829,9 +911,13 @@ export default {
       background-color: white;
     }
   }
-}
+  }
   .dropdown-toggle::after{
     border: none;
+  }
+  &.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
 }
 svg{
   font-size: 23px;
@@ -840,11 +926,11 @@ svg{
   cursor: pointer;
   padding: 10px 0;
   &.rightic{
-    margin-left: 30px;
+    margin-inline-start: 30px;
   }
   }
   .leftic{
-    margin-right: 30px;
+    margin-inline-end: 30px;
   }
   .secheader{
     .passed{

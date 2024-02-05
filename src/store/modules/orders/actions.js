@@ -1,14 +1,16 @@
+import i18n from '../../../i18n'
+
 export default {
   async setorder (context, payload) {
     const userId = context.rootGetters['auth/userId']
-    const response = await fetch(`https://stabraq-clown-default-rtdb.firebaseio.com/orders/${userId}.json`, {
+    const response = await fetch(`https://stabraq-clone-default-rtdb.firebaseio.com/orders/${userId}.json`, {
       method: 'POST',
       body: JSON.stringify(payload)
     })
     const responseData = await response.json()
 
     if (!response.ok) {
-      const error = new Error(responseData.message || 'failed to send order')
+      const error = new Error(responseData.message || i18n.t('errorAndNote.store.ordersModule.setorderfiled'))
       throw error
     }
 
@@ -16,11 +18,11 @@ export default {
   },
   async fetchorders (context) {
     const userId = context.rootGetters['auth/userId']
-    const response = await fetch(`https://stabraq-clown-default-rtdb.firebaseio.com/orders/${userId}.json`)
+    const response = await fetch(`https://stabraq-clone-default-rtdb.firebaseio.com/orders/${userId}.json`)
     const responseData = await response.json()
 
     if (!response.ok) {
-      const error = new Error(responseData.message || 'failed to get order')
+      const error = new Error(responseData.message || i18n.t('errorAndNote.store.ordersModule.fetchordersfiled'))
       throw error
     }
 

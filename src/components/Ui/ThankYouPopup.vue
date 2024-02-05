@@ -6,10 +6,10 @@
       <div @click="closebar" class="closebtn">X</div>
       <div class="content">
         <div class="prodcontent">
-          <span>Your order is confirmed</span>
-          <p>You’ll receive an email when your order is ready for pickup.</p>
+          <span>{{ $t('ui.thanky.confirmed') }}</span>
+          <p>{{ $t('ui.thanky.confp') }}</p>
           <div class="btns">
-            <base-button @click="closebar" type='main-rev'>continue shopping</base-button>
+            <base-button @click="closebar" type='main-rev'>{{ $t('ui.thanky.btn') }}</base-button>
           </div>
         </div>
       </div>

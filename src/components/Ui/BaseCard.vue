@@ -4,7 +4,7 @@
       <span :class='state'>{{ state }}</span>
     </a>
     <a :href='cardlink'>
-      <img class="card-img-top" :src="colorex || img" alt="">
+      <img v-if="img" class="card-img-top" :src="colorex || img" alt="">
     </a>
     <div class="card-body">
       <transition name="wishlist">
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     cardlink () {
-      return '/products/' + this.name
+      return '/products/' + this.name + `?id=${this.id}`
     },
     getwishlist () {
       return this.$store.getters.wishlist.length
@@ -76,7 +76,7 @@ export default {
     },
     changecolor (e, color) {
       this.colorex = color
-      const colors = document.querySelectorAll('.imgcontainer img')
+      const colors = [...e.target.parentElement.parentElement.getElementsByTagName('img')]
       colors.forEach((color) => {
         color.classList.remove('selcolor')
       })
@@ -142,6 +142,9 @@ export default {
       text-align: center;
       font-weight: 700;
       font-size: 13px;
+      & > .placeholder{
+        margin: auto;
+      }
       a{
         white-space: nowrap;
         overflow: hidden;

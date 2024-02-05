@@ -6,21 +6,21 @@
       <div class="controls flex-lg-row-reverse">
         <div class="right">
           <div class="sorting d-flex">
-            <span class="spantit d-none d-md-flex">Sort by</span>
+            <span class="spantit d-none d-md-flex">{{ $t('collectionPage.sort.head') }}</span>
             <select v-model="sorting" class="form-select" aria-label="Default select example">
-              <option selected value="1">Featured</option>
-              <option value="2">Price, low to high</option>
-              <option value="3">Price, high to low</option>
-              <option value="4">Alphabetically, A-Z</option>
-              <option value="5">Alphabetically, Z-A</option>
-              <option value="6">Date, old to new</option>
-              <option value="7">Date, new to old</option>
-              <option value="8">Best Selling</option>
+              <option selected value="1">{{ $t('collectionPage.sort.sort1') }}</option>
+              <option value="2">{{ $t('collectionPage.sort.sort2') }}</option>
+              <option value="3">{{ $t('collectionPage.sort.sort3') }}</option>
+              <option value="4">{{ $t('collectionPage.sort.sort4') }}</option>
+              <option value="5">{{ $t('collectionPage.sort.sort5') }}</option>
+              <option value="6">{{ $t('collectionPage.sort.sort6') }}</option>
+              <option value="7">{{ $t('collectionPage.sort.sort7') }}</option>
+              <option value="8">{{ $t('collectionPage.sort.sort8') }}</option>
             </select>
           </div>
         </div>
         <div class="left">
-          <span class="spantit d-none d-md-flex">View as</span>
+          <span class="spantit d-none d-md-flex">{{ $t('collectionPage.viewas') }}</span>
           <div class="bars  d-flex">
             <div @click="activebar" data-bars='2' class="bar bar-2 active">
             </div>
@@ -62,7 +62,7 @@ export default {
       if (this.$route.query.type === undefined) {
         return this.collectionsId
       } else {
-        return `YOUR SEARCH FOR  "${this.collectionsId}"  REVEALED THE FOLLOWING:`
+        return this.$i18n.t('errorAndNote.collectionPage.yoursearch1') + this.collectionsId + this.$i18n.t('errorAndNote.collectionPage.yoursearch2')
       }
     },
     filterData () {
@@ -121,36 +121,42 @@ export default {
     },
     nodatap () {
       if (this.collectionsId === 'wishlist') {
-        return 'Sorry, u didnt add any product to your wishlist'
+        return this.$i18n.t('errorAndNote.collectionPage.nodata1')
       } else if (this.$route.query.type === undefined) {
-        return 'Sorry, there are no products in this collection'
+        return this.$i18n.t('errorAndNote.collectionPage.nodata2')
       } else {
-        return 'Sorry, there are no products match this search'
+        return this.$i18n.t('errorAndNote.collectionPage.nodata3')
       }
     }
   },
   methods: {
-    restbars () {
-      const bars = document.querySelectorAll('.bar')
-      bars.forEach((bar) => {
-        bar.classList.remove('active')
-      })
-      const basebar = document.querySelector('.bar-2')
-      basebar.classList.add('active')
-    },
+    // restbars () {
+    //   const bars = document.querySelectorAll('.bar')
+    //   bars.forEach((bar) => {
+    //     bar.classList.remove('active')
+    //   })
+    //   const basebar = document.querySelector('.bar-2')
+    //   basebar.classList.add('active')
+    // },
     nodatatoggle () {
-      if (this.filterData.length === 0) {
-        this.nodata = true
-      } else {
-        this.nodata = false
+      if (this.$store.getters.mData.length !== 0) {
+        if (this.filterData.length === 0) {
+          this.nodata = true
+        } else {
+          this.nodata = false
+        }
       }
     },
     async loadData () {
+      const data = this.$store.getters.mData
+      if (data.length !== 0) {
+        return
+      }
       this.isLoading = true
       try {
         await this.$store.dispatch('fetchData')
       } catch (error) {
-        this.error = error.message || 'something went wrong'
+        this.error = error.message || this.$i18n.t('errorAndNote.collectionPage.dataerror')
       }
       this.isLoading = false
     },
@@ -174,30 +180,19 @@ export default {
         }
       })
     }
-    // controlsbar () {
-    //   const controls = document.querySelector('.controls')
-    //   if (window.innerWidth < 1100 && this.$route.path === `/collections/${this.collectionsId}`) {
-    //     if (window.scrollY > controls.offsetTop) {
-    //       controls.classList.add('fixedcontrols')
-    //     } else {
-    //       controls.classList.remove('fixedcontrols')
-    //     }
-    //   } else {
-    //     if (this.$route.path === `/collections/${this.collectionsId}`) {
-    //       controls.classList.remove('fixedcontrols')
-    //     }
-    //   }
-    // }
   },
   created () {
     this.loadData()
-    // window.addEventListener('scroll', this.controlsbar)
-    // window.addEventListener('resize', this.controlsbar)
+    this.nodatatoggle()
   },
   updated () {
     this.nodatatoggle()
-    this.restbars()
-  }
+    // this.restbars()
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 
@@ -214,17 +209,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       margin: 40px 0 30px;
-      // &.fixedcontrols{
-      //   z-index: 0;
-      //   background-color: white;
-      //   position: fixed;
-      //   width: 100%;
-      //   left: 0px;
-      //   margin: 50px 0;
-      //   padding: 20px 40px 10px;
-      //   top: 0;
-      //   transition-duration: .3s;
-      // }
       .left,
       .right{
         display: flex;

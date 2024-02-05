@@ -4,39 +4,39 @@
   <div class="container">
     <div class="content">
       <div class="head">
-        <h2>DROP US A LINE</h2>
+        <h2>{{ $t('information.contactus.head') }}</h2>
         <span></span>
       </div>
       <div class="flexcont row">
         <div class="formcont col-12 col-md-7 col-lg-8 col-xl-7 ">
-          <p>Have a question or comment? Use the form below to send us a message or contact us by mail at:</p>
+          <p>{{ $t('information.contactus.haveaq') }}</p>
           <form @submit.prevent="">
             <div class="inputcont">
-            <label for="#name">Your Name</label>
+            <label for="#name">{{ $t('information.contactus.yname') }}</label>
               <input type="text" id="name" placeholder="Your Name" v-model="name">
             </div>
             <div class="inputcont">
-              <label for="#phone">Your Phone</label>
+              <label for="#phone">{{ $t('information.contactus.yphone') }}</label>
               <input type="number" id="phone" placeholder="Your Phone" v-model="phone">
             </div>
             <div class="inputcont">
-              <label for="#email">Your Email <span>*</span></label>
+              <label for="#email">{{ $t('information.contactus.yemail') }} <span>*</span></label>
               <input type="email" id="email" placeholder="Your Email Address" v-model="email">
             </div>
             <div class="inputcont">
-              <label for="#comment">Your Comment <span>*</span></label>
+              <label for="#comment">{{ $t('information.contactus.ycomment') }} <span>*</span></label>
               <textarea id="comment" rows="6" placeholder="please leave your comment here" v-model="textarea"></textarea>
             </div>
-            <base-button type='main'>submit contact</base-button>
+            <base-button type='main'>{{ $t('information.contactus.submit') }}</base-button>
           </form>
         </div>
         <div class="infocont col-12 col-md-5 col-lg-4 col-xl-5 ">
-          <h4>STORE INFORMATION</h4>
-          <p>We'd love to hear from you - please use the <br> form to send us your message or ideas. Or <br> simply pop in for a cup of fresh tea and a <br> cookie:</p>
-          <p>Address: 1 Mostafa El-Nahaas, Nasr City, <br> Cairo</p>
-          <p>Email: info@stabraq.com <br> Mobile: 002-01123399345</p>
+          <h4>{{ $t('information.contactus.storeinfo') }}</h4>
+          <p>{{ $t('information.contactus.storeinfop1') }} <br> {{ $t('information.contactus.storeinfop2') }} <br> {{ $t('information.contactus.storeinfop3') }} <br> {{ $t('information.contactus.storeinfop4') }}</p>
+          <p>{{ $t('information.contactus.storeinfop5') }} <br> {{ $t('information.contactus.storeinfop6') }}</p>
+          <p>{{ $t('information.contactus.storeinfop7') }} <br> {{ $t('information.contactus.storeinfop8') }}</p>
           <hr>
-          <p>Opening Hours: <br> Sunday to Thursday: 12pm - 12am <br> Fridays: 1pm - 12am</p>
+          <p>{{ $t('information.contactus.storeinfop9') }} <br> {{ $t('information.contactus.storeinfop10') }} <br> {{ $t('information.contactus.storeinfop11') }}</p>
         </div>
       </div>
     </div>
@@ -53,7 +53,11 @@ export default {
       email: '',
       textarea: ''
     }
-  }
+  },
+  mounted () {
+    this.$emit('fullmounted')
+  },
+  emits: ['fullmounted']
 }
 </script>
 

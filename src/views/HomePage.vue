@@ -28,7 +28,7 @@
     </div>
     <div class="container">
       <div class="lookingfor">
-        <h3>I’m looking for..</h3>
+        <h3>{{ $t('homePage.lookingfor.title') }}</h3>
         <div class="row items">
           <div class="col-4 col-md-3 col-lg-2 item">
             <div class="item-box">
@@ -38,7 +38,7 @@
                 </router-link>
               </div>
               <span class="arouter">
-                <router-link to="/collections/T-shirts">T-SHIRTS</router-link>
+                <router-link to="/collections/T-shirts">{{ $t('homePage.lookingfor.tshirts') }}</router-link>
               </span>
             </div>
           </div>
@@ -50,7 +50,7 @@
                 </router-link>
               </div>
               <span class="arouter">
-                <router-link to="/collections/Pants">PANTS</router-link>
+                <router-link to="/collections/Pants">{{ $t('homePage.lookingfor.pants') }}</router-link>
               </span>
             </div>
           </div>
@@ -62,7 +62,7 @@
                 </router-link>
               </div>
               <span class="arouter">
-                <router-link to="/collections/WOMEN">WOMEN</router-link>
+                <router-link to="/collections/WOMEN">{{ $t('homePage.lookingfor.women') }}</router-link>
               </span>
             </div>
           </div>
@@ -74,7 +74,7 @@
                 </router-link>
               </div>
               <span class="arouter">
-                <router-link to="/collections/KIDS">KIDS</router-link>
+                <router-link to="/collections/KIDS">{{ $t('homePage.lookingfor.kids') }}</router-link>
               </span>
             </div>
           </div>
@@ -86,7 +86,7 @@
                 </router-link>
               </div>
               <span class="arouter">
-                <router-link to="/collections/BAGS">BAGS</router-link>
+                <router-link to="/collections/BAGS">{{ $t('homePage.lookingfor.bags') }}</router-link>
               </span>
             </div>
           </div>
@@ -98,7 +98,7 @@
                 </router-link>
               </div>
               <span class="arouter">
-                <router-link to="/collections/ACCESSORIES">ACCESSORIES</router-link>
+                <router-link to="/collections/ACCESSORIES">{{ $t('homePage.lookingfor.accessories') }}</router-link>
               </span>
             </div>
           </div>
@@ -108,12 +108,12 @@
     <div class="slide-carousel-1 row">
       <div class="col-12 col-md-3">
         <div class="info">
-        <p>New items that you can’t miss out on</p>
-        <span class="text-uppercase">graphics collection</span>
+        <p>{{ $t('homePage.newitems.head') }}</p>
+        <span class="text-uppercase">{{ $t('homePage.newitems.p') }}</span>
         </div>
       </div>
       <div class="products col-12 col-md-9">
-        <carousel v-bind="settings" :breakpoints="breakpoints">
+        <carousel v-bind="settings" :breakpoints="breakpoints" :dir="pageDir">
           <slide v-for="product in filterData" :key="product.id">
             <base-card :id ='product.id' :name='product.product_name' :price='product.price' :img='product.main_image' :state='product.state'></base-card>
           </slide>
@@ -161,15 +161,15 @@
     <div class="container">
       <div class="trending">
         <div class="head flex-column flex-md-row align-items-start align-items-md-center">
-          <h2>Trending</h2>
+          <h2>{{ $t('homePage.trending.head') }}</h2>
           <div class="sections">
-            <span @click="activetrending" class="active">T-shirts</span>
-            <span @click="activetrending">Pants</span>
-            <span @click="activetrending">ACCESSORIES</span>
+            <span @click="activetrending" data-trending = 'T-shirts' class="active">{{ $t('homePage.trending.sec1') }}</span>
+            <span @click="activetrending" data-trending = 'Pants'>{{ $t('homePage.trending.sec2') }}</span>
+            <span @click="activetrending" data-trending = 'ACCESSORIES'>{{ $t('homePage.trending.sec3') }}</span>
           </div>
         </div>
         <div class="trending-carousel">
-          <carousel v-bind="trendingsettings" :breakpoints="trendingbreakpoints">
+          <carousel v-bind="trendingsettings" :breakpoints="trendingbreakpoints" :dir="pageDir">
             <slide v-for="product in trendingData" :key="product.id">
               <base-card :id ='product.id' :name='product.product_name' :price='product.price' :img='product.main_image' :state='product.state' :discount='product.discount'></base-card>
             </slide>
@@ -200,11 +200,11 @@
       <div class="col-12 col-lg-7">
         <div class="kidscarousel">
           <div class="info">
-            <h2>Furture Trendsetters</h2>
-            <a href="/collections/KIDS">SHOP ALL</a>
+            <h2>{{ $t('homePage.furturetrend.head') }}</h2>
+            <a href="/collections/KIDS">{{ $t('homePage.furturetrend.p') }}</a>
           </div>
           <div class="maincarousel">
-            <carousel v-bind="trendingsettings" :breakpoints="trendingbreakpoints">
+            <carousel v-bind="trendingsettings" :breakpoints="trendingbreakpoints" :dir="pageDir">
             <slide v-for="product in filterData" :key="product.id">
               <base-card :id ='product.id' :name='product.product_name' :price='product.price' :img='product.main_image' :state='product.state' :discount='product.discount'></base-card>
             </slide>
@@ -241,6 +241,7 @@ export default {
     Slide,
     Navigation
   },
+  emits: ['fullmounted'],
   data () {
     return {
       settings: {
@@ -274,6 +275,9 @@ export default {
     }
   },
   computed: {
+    pageDir () {
+      return this.$store.getters.pageDir
+    },
     filterData () {
       const products = this.$store.getters.mData
       return products.filter((product) => {
@@ -282,18 +286,15 @@ export default {
     },
     trendingData () {
       const data = this.$store.getters.mData
-      return data.filter((product) => {
+      const ret = data.filter((product) => {
         return product.category === this.activetrend
       })
+      return ret
     }
   },
   methods: {
-    async loadData () {
-      try {
-        await this.$store.dispatch('fetchData')
-      } catch (error) {
-        this.loadDataError = error.message
-      }
+    loadData () {
+      this.$store.dispatch('fetchData')
     },
     activetrending (e) {
       const spans = document.querySelectorAll('.sections span')
@@ -301,11 +302,14 @@ export default {
         span.classList.remove('active')
       })
       e.target.classList.add('active')
-      this.activetrend = e.target.textContent
+      this.activetrend = e.target.dataset.trending
     }
   },
   created () {
     this.loadData()
+  },
+  mounted () {
+    this.$emit('fullmounted')
   }
 }
 </script>
@@ -339,12 +343,6 @@ export default {
     &:hover{
       opacity: 0.7;
     }
-    &.left{
-      left: 20%;
-    }
-    &.right{
-      right: 20%;
-    }
     svg{
       color: #ffffff;
       font-size: 20px;
@@ -361,6 +359,18 @@ export default {
               height: 100%;
             }
           }
+        }
+      }
+      .carbtn{
+        &.left{
+          /*!rtl:begin:ignore*/
+          left: 20%;
+          /*!rtl:end:ignore*/
+        }
+        &.right{
+          /*!rtl:begin:ignore*/
+          right: 20%;
+          /*!rtl:end:ignore*/
         }
       }
     }
@@ -460,10 +470,14 @@ export default {
         opacity: 1;
         transition-duration: .3s;
         &.left{
+          /*!rtl:begin:ignore*/
           left: 0px;
+          /*!rtl:end:ignore*/
         }
         &.right{
+          /*!rtl:begin:ignore*/
           right: 0px;
+          /*!rtl:end:ignore*/
         }
         svg{
           color: black;
