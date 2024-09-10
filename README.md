@@ -36,12 +36,12 @@ This project is a full-stack e-commerce application built using Vue.js on the fr
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/E-commerce-website-Vue.js.git
+git clone https://github.com/mhmdbdr/E-commerce-Vue.js
 ```
 2. Change into the project directory:
 
 ```
-cd E-commerce-website-Vue.js
+cd E-commerce-Vue.js
 ```
 3. Install dependencies:
 
